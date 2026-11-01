@@ -1,8 +1,8 @@
-# Open questions and qualification decisions
+# Accepted proposals and remaining qualification evidence
 
-Enough is known to publish a concrete first-party design and backlog. The following answers are needed before their implementation/release gates. Defaults are proposals, not inferred owner approvals.
+On 2026-11-01, the project owner accepted every proposal below without changes. These are now the approved working decisions. See [ADR 0002](decisions/0002-owner-acceptance.md). The original proposals are preserved verbatim in the table; conditional alternatives remain conditional. Environment inventories, measurements, provider availability and named operational owners still require evidence at their existing gates; acceptance does not invent those facts.
 
-| Question | Working proposal | Gate |
+| Original question / evidence to collect | Accepted proposal | Qualification gate |
 |---|---|---|
 | Is TypeScript/Node.js preferred, or must the service be Go? | Align with current Falcone and IAM/workflow contracts; benchmark before commitment | P0 component ADR |
 | Which open-source license should this repository use? | No project license selected; no upstream runtime source copied in this bootstrap | Before code distribution |
@@ -24,4 +24,4 @@ Enough is known to publish a concrete first-party design and backlog. The follow
 | Who owns runtime patches, root custody, on-call and independent review? | Roles in operations.md; actual people/rotations not assumed | Production readiness |
 | What canary scope, write-freeze window and rollback retention are acceptable? | Fenced per-scope cutover and post-cutover reconciliation | P3 rollout |
 
-The root-custody/bootstrap profile is the main unresolved architectural dependency. It cannot be solved by putting the only unlock secret in the service it unlocks. Record decisions with owner, date, evidence and affected SEC story IDs.
+The accepted root-custody preference is an existing independent KMS/HSM or custody provider. Its actual availability and integration must still be qualified before implementation. Operator unlock remains the separately approved alternative described in the original proposal; acceptance does not select it in place of the preferred path. Record implementation evidence against the affected SEC story IDs. No further confirmation of the proposals in this table is needed.

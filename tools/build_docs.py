@@ -241,6 +241,8 @@ def generate():
         body=f"<!-- falcone-secrets:{e['id']} -->\n\n## Outcome\n\n{e['outcome']}\n\n## Scope\n\nCustom Falcone secret management, preserving Falcone contracts and tenant/workspace boundaries. See [architecture](https://github.com/{REPO}/blob/main/docs/architecture.md) and [requirements](https://github.com/{REPO}/blob/main/docs/requirements.md).\n\n## Stories\n\n"
         body+=''.join(f"- [ ] {link(s['id'])}: {s['title']}\n" for s in e['stories'])
         body+='\n## Exit criteria\n\nAll child criteria have linked evidence and the security/integration impact is reviewed. Planning publication does not mean implementation is complete.\n'
+        if e['id'] in ('SEC-CON', 'SEC-BOOT'):
+            body += f'\n## Accepted decisions\n\nOn 2026-11-01 the project owner accepted all open-point proposals without changes. [ADR 0002](https://github.com/{REPO}/blob/main/docs/decisions/0002-owner-acceptance.md) records the decision. Existing implementation and qualification criteria remain required; this epic is not completed by design acceptance.\n'
         issues.append(dict(id=e['id'],title=f"[Epic][{e['id']}] {e['title']}",body=body,labels=['type:epic',f"area:{e['category']}"]))
         rows.append(dict(ID=e['id'],Type='Epic',Title=e['title'],Parent='',Phase='',Effort='',Dependencies='',URL=mapping.get(e['id'],{}).get('url','')))
         for s in e['stories']:

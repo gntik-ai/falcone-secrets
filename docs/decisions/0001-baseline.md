@@ -1,6 +1,6 @@
 # ADR 0001 — Falcone-native secret custody and lifecycle
 
-Date: 2026-11-01. Status: **proposed**. The owner requested a custom Falcone replacement and authorized the planning/backlog publication; technical profiles and production rollout still require qualification.
+Date: 2026-11-01. Status: **accepted by the project owner**; see [ADR 0002](0002-owner-acceptance.md). The owner accepted all open-point proposals without changes. Technical profiles and production rollout still require the qualification evidence already specified.
 
 ## Decision
 
@@ -18,7 +18,7 @@ The principal costs are security maintenance, root-key recovery, provider-specif
 
 | Path | Scalability / ergonomics | Operational cost | Falcone compatibility and decision |
 |---|---|---|---|
-| Custom modular service with library crypto and independent key provider | Reuse JS contracts; replicate API/workers; benchmark audit and KMS limits | Own schema, crypto configuration, recovery and lifecycle correctness | Proposed target; protocol and custody qualification first |
+| Custom modular service with library crypto and independent key provider | Reuse JS contracts; replicate API/workers; benchmark audit and KMS limits | Own schema, crypto configuration, recovery and lifecycle correctness | Accepted target; protocol and custody qualification first |
 | Custom Go core | Potentially simpler binary/concurrency and crypto-worker isolation; requires cross-language fixtures | Different contributor/tooling skills; memory still requires careful handling | Viable if team/runtime requirements justify it; not assumed inherently secure or faster |
 | Falcone facade over OpenBao during migration | Fastest contract/consumer validation | Retains existing service, seal and upgrade work | Useful transitional phase; not the final requested dependency replacement |
 | Embed or fork an OpenBao component | Could reuse mature behavior but internal APIs and MPL obligations need review | Large upstream merge/patch surface and possible retained complexity | Evaluate only for a concrete component; do not treat a renamed fork as a smaller architecture |

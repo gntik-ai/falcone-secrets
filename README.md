@@ -2,7 +2,7 @@
 
 Architecture and delivery backlog for **Falcone's custom secret-management service**, intended to replace OpenBao while preserving Falcone interfaces, tenant/workspace isolation and application behavior.
 
-**Status: proposed design and planning artifacts. No secrets runtime has been implemented, deployed or migrated by this repository bootstrap.** The service owns secret custody, resolution, key operations and credential lifecycle; `falcone-iam` owns identity, roles and federation. Falcone remains the product and policy authority.
+**Status: design and open-point proposals accepted by the project owner on 2026-11-01, without changes. No secrets runtime has been implemented, deployed or migrated by this repository bootstrap.** The service owns secret custody, resolution, key operations and credential lifecycle; `falcone-iam` owns identity, roles and federation. Falcone remains the product and policy authority. Acceptance is recorded in [ADR 0002](docs/decisions/0002-owner-acceptance.md); existing qualification gates remain applicable.
 
 Research date: 2026-11-01. Source baseline: [`gntik-ai/falcone@ed04fe7`](https://github.com/gntik-ai/falcone/tree/ed04fe7269d32f3f3e3cbc434ab5168389153ed6). Documentation and code establish contract evidence, not blanket production qualification.
 
@@ -20,8 +20,8 @@ Research date: 2026-11-01. Source baseline: [`gntik-ai/falcone@ed04fe7`](https:/
 | [Migration](docs/migration.md) | OpenBao cutover, key/lease portability and rollback |
 | [Requirements](docs/requirements.md) | 84 testable statements |
 | [Epics and stories](docs/backlog.md) | 14 epics and 42 stories with criteria, dependencies and effort |
-| [Architecture decision](docs/decisions/0001-baseline.md) | Proposed baseline and alternatives |
-| [Open questions](docs/open-questions.md) | Decisions required before implementation and production gates |
+| [Architecture decision](docs/decisions/0001-baseline.md) | Accepted baseline and conditional alternatives |
+| [Accepted proposals](docs/open-questions.md) | Original proposals, owner acceptance and remaining qualification evidence |
 | [Sources](docs/sources.md) | Primary references and pinned source evidence |
 
 ## Implementation path
