@@ -1,0 +1,590 @@
+[
+  {
+    "id": "SEC-CON",
+    "title": "[Epic][SEC-CON] Falcone contracts and replacement scope",
+    "body": "<!-- falcone-secrets:SEC-CON -->\n\n## Outcome\n\nDefine an evidence-based replacement boundary without changing Falcone product semantics.\n\n## Scope\n\nCustom Falcone secret management, preserving Falcone contracts and tenant/workspace boundaries. See [architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) and [requirements](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/requirements.md).\n\n## Stories\n\n- [ ] SEC-CON-001: Freeze the current secret-management contract inventory\n- [ ] SEC-CON-002: Define ownership and first-party service boundaries\n- [ ] SEC-CON-003: Qualify implementation components and license provenance\n\n## Exit criteria\n\nAll child criteria have linked evidence and the security/integration impact is reviewed. Planning publication does not mean implementation is complete.\n",
+    "labels": [
+      "type:epic",
+      "area:con"
+    ]
+  },
+  {
+    "id": "SEC-CON-001",
+    "title": "[SEC-CON-001] Freeze the current secret-management contract inventory",
+    "body": "<!-- falcone-secrets:SEC-CON-001 -->\n\nParent: SEC-CON\n\n## User story\n\nAs a Falcone maintainer, I want versioned fixtures for every secret consumer, so that migration preserves existing behavior.\n\n## Description\n\nVersioned fixtures for every secret consumer.\n\nPhase: P0 \u00b7 Effort: M\n\n## Requirements\n\n- **FR-CON-001-1**: The project must inventory every OpenBao client, mount, auth path, secret reference, rotation consumer and non-OpenBao key lifecycle against a pinned Falcone commit.\n- **FR-CON-001-2**: The system must preserve approved Falcone API routes, metadata fields, status codes and error precedence through contract tests.\n\n## Acceptance criteria\n\n- [ ] Cover workspace secret CRUD, inventory domains, rotation, consumer acknowledgements, BYOK, function projection and workflow credential references.\n- [ ] Distinguish code, documentation, deployment evidence and planned sibling-service contracts; record actual OpenBao/ESO versions separately.\n- [ ] Identify direct Vault-compatible callers and make an explicit adapter/retirement decision for each; do not promise the entire Vault API.\n\n## Dependencies\n\nNone; discovery can begin independently.\n\n## Design references\n\n[Architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) \u00b7 [Integration matrix](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/integration-matrix.md) \u00b7 [Security](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/security.md).\n",
+    "labels": [
+      "type:story",
+      "area:con",
+      "phase:p0",
+      "effort:m"
+    ]
+  },
+  {
+    "id": "SEC-CON-002",
+    "title": "[SEC-CON-002] Define ownership and first-party service boundaries",
+    "body": "<!-- falcone-secrets:SEC-CON-002 -->\n\nParent: SEC-CON\n\n## User story\n\nAs a platform architect, I want one owner per secret, policy, credential and projection, so that services do not compete to manage security state.\n\n## Description\n\nOne owner per secret, policy, credential and projection.\n\nPhase: P0 \u00b7 Effort: M\n\n## Requirements\n\n- **FR-CON-002-1**: The system must define a single authoritative writer for secret versions, rotation state, leases, policies and backend credentials throughout migration.\n- **FR-CON-002-2**: Falcone IAM must remain the owner of users, roles and federation, while Falcone quota services remain the owner of entitlements and accounting.\n\n## Acceptance criteria\n\n- [ ] Document IAM/secrets/bootstrap dependencies and the transition from OpenBao to falcone-secrets without modifying sibling repositories implicitly.\n- [ ] Map legacy domains platform, tenant, functions, gateway and iam to canonical scoped resources; ownership is not inferred from a caller path.\n- [ ] Separate operator bootstrap material, IAM session credentials, backend credentials and tenant application secrets, with named custodians.\n\n## Dependencies\n\nSEC-CON-001\n\n## Design references\n\n[Architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) \u00b7 [Integration matrix](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/integration-matrix.md) \u00b7 [Security](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/security.md).\n",
+    "labels": [
+      "type:story",
+      "area:con",
+      "phase:p0",
+      "effort:m"
+    ]
+  },
+  {
+    "id": "SEC-CON-003",
+    "title": "[SEC-CON-003] Qualify implementation components and license provenance",
+    "body": "<!-- falcone-secrets:SEC-CON-003 -->\n\nParent: SEC-CON\n\n## User story\n\nAs a maintainer, I want reviewed cryptographic and protocol components, so that custom product behavior does not require custom cryptography.\n\n## Description\n\nReviewed cryptographic and protocol components.\n\nPhase: P0 \u00b7 Effort: L\n\n## Requirements\n\n- **FR-CON-003-1**: The implementation must use maintained cryptographic, TLS and identity libraries with pinned versions and an upgrade owner.\n- **FR-CON-003-2**: Dependency intake must distinguish open-source references from source-available and enterprise-only code and record provenance before copying or embedding code.\n\n## Acceptance criteria\n\n- [ ] Prototype the proposed TypeScript/Node service and key-provider adapter against required algorithms, throughput and memory exposure; record alternatives if qualification fails.\n- [ ] Review OpenBao MPL-2.0, current Vault BSL, Infisical editions and each chosen dependency; the project license remains an owner decision.\n- [ ] Do not treat an upstream certification, feature advertisement or reference design as certification of the configured Falcone service.\n\n## Dependencies\n\nSEC-CON-001\n\n## Design references\n\n[Architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) \u00b7 [Integration matrix](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/integration-matrix.md) \u00b7 [Security](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/security.md).\n",
+    "labels": [
+      "type:story",
+      "area:con",
+      "phase:p0",
+      "effort:l"
+    ]
+  },
+  {
+    "id": "SEC-AUTH",
+    "title": "[Epic][SEC-AUTH] Identity, policy and tenant isolation",
+    "body": "<!-- falcone-secrets:SEC-AUTH -->\n\n## Outcome\n\nAuthorize each metadata, value, key and lifecycle operation using trusted Falcone context.\n\n## Scope\n\nCustom Falcone secret management, preserving Falcone contracts and tenant/workspace boundaries. See [architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) and [requirements](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/requirements.md).\n\n## Stories\n\n- [ ] SEC-AUTH-001: Integrate user and service authorization with Falcone IAM\n- [ ] SEC-AUTH-002: Implement canonical namespaces and reference validation\n- [ ] SEC-AUTH-003: Implement workload credentials and bounded policy freshness\n\n## Exit criteria\n\nAll child criteria have linked evidence and the security/integration impact is reviewed. Planning publication does not mean implementation is complete.\n",
+    "labels": [
+      "type:epic",
+      "area:auth"
+    ]
+  },
+  {
+    "id": "SEC-AUTH-001",
+    "title": "[SEC-AUTH-001] Integrate user and service authorization with Falcone IAM",
+    "body": "<!-- falcone-secrets:SEC-AUTH-001 -->\n\nParent: SEC-AUTH\n\n## User story\n\nAs a service owner, I want audience-bound identities and scoped authorization decisions, so that secrets are accessible only to approved callers.\n\n## Description\n\nAudience-bound identities and scoped authorization decisions.\n\nPhase: P1 \u00b7 Effort: L\n\n## Requirements\n\n- **FR-AUTH-001-1**: Every online secret operation must authenticate its caller and authorize action, resource, tenant/workspace, audience and delegated authority.\n- **FR-AUTH-001-2**: Metadata listing, value resolution, key use, key administration, rotation and destruction must be distinct permissions with deny-by-default behavior.\n\n## Acceptance criteria\n\n- [ ] Test Keycloak-era and falcone-iam adapters without adding a second login/federation stack to secrets; preserve SAML/OIDC/LDAP/AD/SCIM identity handling through IAM.\n- [ ] Reject forged gateway headers, wrong audiences, cross-tenant IDs, untrusted resource owners and stale policy revisions.\n- [ ] Preserve current public role/error contracts through an adapter while reviewing legacy role-name aliases; a platform role does not automatically reveal values.\n\n## Dependencies\n\nSEC-CON-002\n\n## Design references\n\n[Architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) \u00b7 [Integration matrix](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/integration-matrix.md) \u00b7 [Security](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/security.md).\n",
+    "labels": [
+      "type:story",
+      "area:auth",
+      "phase:p1",
+      "effort:l"
+    ]
+  },
+  {
+    "id": "SEC-AUTH-002",
+    "title": "[SEC-AUTH-002] Implement canonical namespaces and reference validation",
+    "body": "<!-- falcone-secrets:SEC-AUTH-002 -->\n\nParent: SEC-AUTH\n\n## User story\n\nAs a tenant administrator, I want stable scoped secret references, so that a reference cannot escape its tenant or environment.\n\n## Description\n\nStable scoped secret references.\n\nPhase: P1 \u00b7 Effort: M\n\n## Requirements\n\n- **FR-AUTH-002-1**: Secret IDs and references must bind domain, tenant, workspace/environment, secret identity and permitted version selection without accepting arbitrary backend paths.\n- **FR-AUTH-002-2**: All list, count, search and lookup operations must filter by authorized scope before pagination and avoid cross-tenant existence disclosure.\n\n## Acceptance criteria\n\n- [ ] Normalize or reject ambiguous encoding, traversal, mixed separators, duplicate names and conflicting tenant/workspace fields.\n- [ ] Test the same secret name in two tenants/workspaces; references are locators requiring authorization, not bearer authority.\n- [ ] Keep metadata-only public schemas distinct from internal resolution contracts and preserve legacy name aliases where required.\n\n## Dependencies\n\nSEC-AUTH-001\n\n## Design references\n\n[Architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) \u00b7 [Integration matrix](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/integration-matrix.md) \u00b7 [Security](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/security.md).\n",
+    "labels": [
+      "type:story",
+      "area:auth",
+      "phase:p1",
+      "effort:m"
+    ]
+  },
+  {
+    "id": "SEC-AUTH-003",
+    "title": "[SEC-AUTH-003] Implement workload credentials and bounded policy freshness",
+    "body": "<!-- falcone-secrets:SEC-AUTH-003 -->\n\nParent: SEC-AUTH\n\n## User story\n\nAs a runtime operator, I want short-lived workload access with a finite freshness budget, so that cancelled or deauthorized work cannot keep fetching secrets.\n\n## Description\n\nShort-lived workload access with a finite freshness budget.\n\nPhase: P1 \u00b7 Effort: L\n\n## Requirements\n\n- **FR-AUTH-003-1**: Workload authentication must bind the verified service or execution identity to tenant/workspace, attempt, resource, audience and expiry.\n- **FR-AUTH-003-2**: Resolution and lease renewal must deny when required authorization freshness cannot be established within the approved bound.\n\n## Acceptance criteria\n\n- [ ] Use Falcone execution grants or a qualified workload identity; guest-supplied scope and Kubernetes labels alone never grant access.\n- [ ] No cluster-wide TokenReview permission is required by the baseline; document offline JWT revocation limitations or separately approved reviewer integration.\n- [ ] Test expired/cancelled attempts, delegated scope reduction, IAM outage and same-name service accounts across namespaces and tenants.\n\n## Dependencies\n\nSEC-AUTH-001, SEC-BOOT-002\n\n## Design references\n\n[Architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) \u00b7 [Integration matrix](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/integration-matrix.md) \u00b7 [Security](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/security.md).\n",
+    "labels": [
+      "type:story",
+      "area:auth",
+      "phase:p1",
+      "effort:l"
+    ]
+  },
+  {
+    "id": "SEC-KV",
+    "title": "[Epic][SEC-KV] Versioned secret storage and lifecycle",
+    "body": "<!-- falcone-secrets:SEC-KV -->\n\n## Outcome\n\nStore recoverable values encrypted while preserving write-only product APIs.\n\n## Scope\n\nCustom Falcone secret management, preserving Falcone contracts and tenant/workspace boundaries. See [architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) and [requirements](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/requirements.md).\n\n## Stories\n\n- [ ] SEC-KV-001: Implement write-only workspace secret CRUD\n- [ ] SEC-KV-002: Implement internal versions, concurrency and retention\n- [ ] SEC-KV-003: Implement inventory, reference tracking and tenant purge\n\n## Exit criteria\n\nAll child criteria have linked evidence and the security/integration impact is reviewed. Planning publication does not mean implementation is complete.\n",
+    "labels": [
+      "type:epic",
+      "area:kv"
+    ]
+  },
+  {
+    "id": "SEC-KV-001",
+    "title": "[SEC-KV-001] Implement write-only workspace secret CRUD",
+    "body": "<!-- falcone-secrets:SEC-KV-001 -->\n\nParent: SEC-KV\n\n## User story\n\nAs a workspace administrator, I want the existing Falcone secret APIs on the new backend, so that applications can migrate without exposing their values.\n\n## Description\n\nThe existing Falcone secret APIs on the new backend.\n\nPhase: P1 \u00b7 Effort: L\n\n## Requirements\n\n- **FR-KV-001-1**: Workspace create, replace, metadata read, list and delete must preserve Falcone write-only value semantics and the approved response schemas.\n- **FR-KV-001-2**: Create must be atomic and create-only, replacement must not leak prior values, and public delete must remove all versions from live resolution as contracted.\n\n## Acceptance criteria\n\n- [ ] Verify 201 create, 409 duplicate without overwrite, 200 metadata/replace, 204 delete and 404 absent behavior with existing error precedence.\n- [ ] Preserve secretName/name alias, timestamps, description and resolvedRefCount; expose neither value nor internal version through FunctionWorkspaceSecret.\n- [ ] Enforce the current name rule and value limit, sanitized failures and reference-registry errors; no console reveal action is introduced.\n\n## Dependencies\n\nSEC-AUTH-002, SEC-KEY-001\n\n## Design references\n\n[Architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) \u00b7 [Integration matrix](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/integration-matrix.md) \u00b7 [Security](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/security.md).\n",
+    "labels": [
+      "type:story",
+      "area:kv",
+      "phase:p1",
+      "effort:l"
+    ]
+  },
+  {
+    "id": "SEC-KV-002",
+    "title": "[SEC-KV-002] Implement internal versions, concurrency and retention",
+    "body": "<!-- falcone-secrets:SEC-KV-002 -->\n\nParent: SEC-KV\n\n## User story\n\nAs a service developer, I want immutable internal versions and compare-and-swap writes, so that concurrent updates cannot silently corrupt state.\n\n## Description\n\nImmutable internal versions and compare-and-swap writes.\n\nPhase: P1 \u00b7 Effort: L\n\n## Requirements\n\n- **FR-KV-002-1**: The store must assign immutable version IDs and use atomic revision checks for create/replace, active-version selection and metadata changes.\n- **FR-KV-002-2**: Internal soft deletion, recovery and irreversible destruction must be distinct operations with explicit retention and authorization rules.\n\n## Acceptance criteria\n\n- [ ] Test concurrent writers, idempotency-key conflicts, retry after commit and references pinned to removed versions.\n- [ ] Do not turn the existing public delete-all route into a recoverable soft delete or resurrect a revoked version through rollback.\n- [ ] Document backup retention and historical-key exposure: deleting live records is not proof of immediate physical erasure from every backup.\n\n## Dependencies\n\nSEC-KV-001\n\n## Design references\n\n[Architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) \u00b7 [Integration matrix](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/integration-matrix.md) \u00b7 [Security](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/security.md).\n",
+    "labels": [
+      "type:story",
+      "area:kv",
+      "phase:p1",
+      "effort:l"
+    ]
+  },
+  {
+    "id": "SEC-KV-003",
+    "title": "[SEC-KV-003] Implement inventory, reference tracking and tenant purge",
+    "body": "<!-- falcone-secrets:SEC-KV-003 -->\n\nParent: SEC-KV\n\n## User story\n\nAs an operator, I want scope-filtered inventory and dependency tracking, so that secret cleanup does not leave hidden references or access.\n\n## Description\n\nScope-filtered inventory and dependency tracking.\n\nPhase: P2 \u00b7 Effort: M\n\n## Requirements\n\n- **FR-KV-003-1**: Inventory and metadata endpoints must preserve approved domains and legacy compatibility fields without returning values or ciphertext.\n- **FR-KV-003-2**: Tenant/workspace purge must tombstone identity and references, block new resolution and expose retryable consumer cleanup progress.\n\n## Acceptance criteria\n\n- [ ] Maintain value-free resource references and correct distinct-function counts even when a referenced secret has been deleted.\n- [ ] A delayed event or stale projection cannot recreate purged secrets; incomplete cleanup is reported rather than marked complete.\n- [ ] Metadata exports, search indexes and support diagnostics obey scope and redaction rules, including user-supplied descriptions.\n\n## Dependencies\n\nSEC-KV-002, SEC-AUD-001\n\n## Design references\n\n[Architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) \u00b7 [Integration matrix](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/integration-matrix.md) \u00b7 [Security](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/security.md).\n",
+    "labels": [
+      "type:story",
+      "area:kv",
+      "phase:p2",
+      "effort:m"
+    ]
+  },
+  {
+    "id": "SEC-KEY",
+    "title": "[Epic][SEC-KEY] Encryption, key custody and rewrapping",
+    "body": "<!-- falcone-secrets:SEC-KEY -->\n\n## Outcome\n\nProtect values with independently rooted encryption and explicit key-version lifecycle.\n\n## Scope\n\nCustom Falcone secret management, preserving Falcone contracts and tenant/workspace boundaries. See [architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) and [requirements](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/requirements.md).\n\n## Stories\n\n- [ ] SEC-KEY-001: Implement authenticated envelope encryption\n- [ ] SEC-KEY-002: Implement key rotation, rewrap and compromise response\n- [ ] SEC-KEY-003: Protect memory, transport and key-provider boundaries\n\n## Exit criteria\n\nAll child criteria have linked evidence and the security/integration impact is reviewed. Planning publication does not mean implementation is complete.\n",
+    "labels": [
+      "type:epic",
+      "area:key"
+    ]
+  },
+  {
+    "id": "SEC-KEY-001",
+    "title": "[SEC-KEY-001] Implement authenticated envelope encryption",
+    "body": "<!-- falcone-secrets:SEC-KEY-001 -->\n\nParent: SEC-KEY\n\n## User story\n\nAs a security engineer, I want encrypted values bound to their resource context, so that database access alone cannot reveal or relocate secrets.\n\n## Description\n\nEncrypted values bound to their resource context.\n\nPhase: P1 \u00b7 Effort: L\n\n## Requirements\n\n- **FR-KEY-001-1**: Secret values must use reviewed authenticated encryption with fresh per-version data keys and authenticated tenant/resource/version context.\n- **FR-KEY-001-2**: Root key-encryption authority must be outside the ciphertext database, with a documented KMS/HSM or approved operator-unlock custody profile.\n\n## Acceptance criteria\n\n- [ ] Use a supported AEAD library and managed nonce generation; reject modified ciphertext, AAD, key IDs and cross-resource substitution.\n- [ ] Store only ciphertext, wrapped data keys and required metadata; PostgreSQL/WAL and backups must never contain plaintext value columns.\n- [ ] Separate platform/domain wrapping keys where policy requires; document that an online authorized service can still decrypt and process values.\n\n## Dependencies\n\nSEC-CON-003, SEC-BOOT-001\n\n## Design references\n\n[Architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) \u00b7 [Integration matrix](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/integration-matrix.md) \u00b7 [Security](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/security.md).\n",
+    "labels": [
+      "type:story",
+      "area:key",
+      "phase:p1",
+      "effort:l"
+    ]
+  },
+  {
+    "id": "SEC-KEY-002",
+    "title": "[SEC-KEY-002] Implement key rotation, rewrap and compromise response",
+    "body": "<!-- falcone-secrets:SEC-KEY-002 -->\n\nParent: SEC-KEY\n\n## User story\n\nAs a key custodian, I want versioned key rotation and resumable rewrapping, so that key replacement does not lose data or revive compromised access.\n\n## Description\n\nVersioned key rotation and resumable rewrapping.\n\nPhase: P1 \u00b7 Effort: L\n\n## Requirements\n\n- **FR-KEY-002-1**: Key rotation must distinguish root/KEK rewrapping, data-key re-encryption and external credential replacement, with separate state and permissions.\n- **FR-KEY-002-2**: Old keys must not be destroyed until retained ciphertext, backups and restore requirements have been reconciled under an approved retirement policy.\n\n## Acceptance criteria\n\n- [ ] Resume interrupted batches with checkpoints and compare-and-swap; concurrent writes use the designated active key version.\n- [ ] Test mixed replicas, KMS outage and lost acknowledgements without claiming rewrap re-encrypts plaintext under a fresh data key.\n- [ ] Emergency key compromise procedures include external credential rotation and assessed backup exposure; rewrapping alone cannot undo prior key compromise.\n\n## Dependencies\n\nSEC-KEY-001\n\n## Design references\n\n[Architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) \u00b7 [Integration matrix](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/integration-matrix.md) \u00b7 [Security](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/security.md).\n",
+    "labels": [
+      "type:story",
+      "area:key",
+      "phase:p1",
+      "effort:l"
+    ]
+  },
+  {
+    "id": "SEC-KEY-003",
+    "title": "[SEC-KEY-003] Protect memory, transport and key-provider boundaries",
+    "body": "<!-- falcone-secrets:SEC-KEY-003 -->\n\nParent: SEC-KEY\n\n## User story\n\nAs a security operator, I want explicit plaintext exposure and transport limits, so that the implementation avoids misleading encryption guarantees.\n\n## Description\n\nExplicit plaintext exposure and transport limits.\n\nPhase: P2 \u00b7 Effort: L\n\n## Requirements\n\n- **FR-KEY-003-1**: All value-bearing service traffic must use authenticated TLS and explicit size/time limits, with debugging and request-body capture disabled in production.\n- **FR-KEY-003-2**: Key-provider interfaces must distinguish non-exportable operations from exported software keys and fail safely on unsupported algorithms or custody mode.\n\n## Acceptance criteria\n\n- [ ] Exclude values from logs, traces, core dumps, metrics and error bodies; qualify crash diagnostics and proxy capture settings.\n- [ ] Document Node/GC zeroization limits, ephemeral plaintext lifetime and optional isolated crypto workers; never claim guaranteed process-memory erasure.\n- [ ] Exercise provider outages, invalid certificates, algorithm mismatch and excessive decrypt/sign requests with bounded resource use.\n\n## Dependencies\n\nSEC-KEY-001, SEC-BOOT-002\n\n## Design references\n\n[Architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) \u00b7 [Integration matrix](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/integration-matrix.md) \u00b7 [Security](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/security.md).\n",
+    "labels": [
+      "type:story",
+      "area:key",
+      "phase:p2",
+      "effort:l"
+    ]
+  },
+  {
+    "id": "SEC-BOOT",
+    "title": "[Epic][SEC-BOOT] Bootstrap, sealing and recovery trust",
+    "body": "<!-- falcone-secrets:SEC-BOOT -->\n\n## Outcome\n\nStart and recover secrets and IAM without a circular dependency or permanent root token.\n\n## Scope\n\nCustom Falcone secret management, preserving Falcone contracts and tenant/workspace boundaries. See [architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) and [requirements](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/requirements.md).\n\n## Stories\n\n- [ ] SEC-BOOT-001: Define and implement root-of-trust bootstrap\n- [ ] SEC-BOOT-002: Implement narrow IAM signing bootstrap and sealed-state behavior\n- [ ] SEC-BOOT-003: Implement break-glass, recovery and custodian procedures\n\n## Exit criteria\n\nAll child criteria have linked evidence and the security/integration impact is reviewed. Planning publication does not mean implementation is complete.\n",
+    "labels": [
+      "type:epic",
+      "area:boot"
+    ]
+  },
+  {
+    "id": "SEC-BOOT-001",
+    "title": "[SEC-BOOT-001] Define and implement root-of-trust bootstrap",
+    "body": "<!-- falcone-secrets:SEC-BOOT-001 -->\n\nParent: SEC-BOOT\n\n## User story\n\nAs a platform installer, I want a concrete first-install and unlock profile, so that secrets can start before it stores platform credentials.\n\n## Description\n\nA concrete first-install and unlock profile.\n\nPhase: P0 \u00b7 Effort: L\n\n## Requirements\n\n- **FR-BOOT-001-1**: The deployment must define independent custody for root wrapping authority, startup database access and recovery authorization before production initialization.\n- **FR-BOOT-001-2**: Bootstrap must not require a credential retrievable only from the uninitialized secrets service or a token signed only by an unavailable IAM dependency.\n\n## Acceptance criteria\n\n- [ ] Specify external KMS/HSM workload identity as preferred profile and a separately approved offline operator-unlock alternative; no external KMS availability is assumed.\n- [ ] Use a one-time authenticated initialization transaction, no default root password and no key material in Helm values or release manifests.\n- [ ] Test fresh install and total restart with IAM offline and record the exact bootstrap trust dependencies.\n\n## Dependencies\n\nSEC-CON-002, SEC-CON-003\n\n## Design references\n\n[Architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) \u00b7 [Integration matrix](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/integration-matrix.md) \u00b7 [Security](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/security.md).\n",
+    "labels": [
+      "type:story",
+      "area:boot",
+      "phase:p0",
+      "effort:l"
+    ]
+  },
+  {
+    "id": "SEC-BOOT-002",
+    "title": "[SEC-BOOT-002] Implement narrow IAM signing bootstrap and sealed-state behavior",
+    "body": "<!-- falcone-secrets:SEC-BOOT-002 -->\n\nParent: SEC-BOOT\n\n## User story\n\nAs an IAM maintainer, I want a restricted bootstrap signing path, so that identity recovery does not require tenant secret access.\n\n## Description\n\nA restricted bootstrap signing path.\n\nPhase: P1 \u00b7 Effort: L\n\n## Requirements\n\n- **FR-BOOT-002-1**: A pre-enrolled IAM workload identity must be able to perform only approved signing-key operations needed to start IAM, independently of IAM-issued end-user tokens.\n- **FR-BOOT-002-2**: Sealed or unavailable key state must deny value/sign operations and expose sanitized readiness/status without restarting endlessly through liveness failure.\n\n## Acceptance criteria\n\n- [ ] Bind operator-provisioned mTLS identity or another independently verifiable workload identity to an exact IAM key purpose; no wildcard secret reads.\n- [ ] After IAM is available, normal secret authorization uses IAM policy; bootstrap credentials cannot be exchanged for general tenant access.\n- [ ] Test issuer/key rotation, IAM down, secrets restart, expired bootstrap identity and recovery access without calling workflows/serverless.\n\n## Dependencies\n\nSEC-BOOT-001\n\n## Design references\n\n[Architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) \u00b7 [Integration matrix](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/integration-matrix.md) \u00b7 [Security](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/security.md).\n",
+    "labels": [
+      "type:story",
+      "area:boot",
+      "phase:p1",
+      "effort:l"
+    ]
+  },
+  {
+    "id": "SEC-BOOT-003",
+    "title": "[SEC-BOOT-003] Implement break-glass, recovery and custodian procedures",
+    "body": "<!-- falcone-secrets:SEC-BOOT-003 -->\n\nParent: SEC-BOOT\n\n## User story\n\nAs a recovery custodian, I want audited emergency access and restoration, so that key loss or platform outage has a controlled recovery path.\n\n## Description\n\nAudited emergency access and restoration.\n\nPhase: P2 \u00b7 Effort: L\n\n## Requirements\n\n- **FR-BOOT-003-1**: Recovery access must be strongly authenticated, time-bounded, narrowly scoped and auditable independently of ordinary tenant credentials.\n- **FR-BOOT-003-2**: Recovery material and its backups must be held separately from encrypted application data and tested under the approved custody policy.\n\n## Acceptance criteria\n\n- [ ] Define named custodian roles and dual control for destructive key retirement; use vetted threshold tooling only if that custody profile is selected.\n- [ ] Run an isolated loss-of-IAM and key-provider recovery exercise; prove that stolen ciphertext backups alone cannot unlock the service.\n- [ ] Expire/revoke emergency credentials after use and document the consequences of permanently lost keys without inventing a decryption backdoor.\n\n## Dependencies\n\nSEC-BOOT-002, SEC-KEY-002, SEC-AUD-001\n\n## Design references\n\n[Architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) \u00b7 [Integration matrix](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/integration-matrix.md) \u00b7 [Security](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/security.md).\n",
+    "labels": [
+      "type:story",
+      "area:boot",
+      "phase:p2",
+      "effort:l"
+    ]
+  },
+  {
+    "id": "SEC-DYN",
+    "title": "[Epic][SEC-DYN] Dynamic credentials and leases",
+    "body": "<!-- falcone-secrets:SEC-DYN -->\n\n## Outcome\n\nIssue bounded backend credentials and track actual revocation rather than metadata expiry alone.\n\n## Scope\n\nCustom Falcone secret management, preserving Falcone contracts and tenant/workspace boundaries. See [architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) and [requirements](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/requirements.md).\n\n## Stories\n\n- [ ] SEC-DYN-001: Implement durable lease issuance and lifecycle\n- [ ] SEC-DYN-002: Implement PostgreSQL credential adapter\n- [ ] SEC-DYN-003: Qualify S3, event and external-provider credential adapters\n\n## Exit criteria\n\nAll child criteria have linked evidence and the security/integration impact is reviewed. Planning publication does not mean implementation is complete.\n",
+    "labels": [
+      "type:epic",
+      "area:dyn"
+    ]
+  },
+  {
+    "id": "SEC-DYN-001",
+    "title": "[SEC-DYN-001] Implement durable lease issuance and lifecycle",
+    "body": "<!-- falcone-secrets:SEC-DYN-001 -->\n\nParent: SEC-DYN\n\n## User story\n\nAs a workload developer, I want renewable short-lived credentials, so that tasks use bounded access instead of shared permanent passwords.\n\n## Description\n\nRenewable short-lived credentials.\n\nPhase: P2 \u00b7 Effort: L\n\n## Requirements\n\n- **FR-DYN-001-1**: Dynamic credential issuance must persist a tenant/workload-bound lease with backend identity, maximum TTL, renewal conditions and revocation status.\n- **FR-DYN-001-2**: Lease renewal must require current authorization and cannot extend past parent grant, job deadline or configured maximum lifetime.\n\n## Acceptance criteria\n\n- [ ] Handle client retries and unknown provider outcomes without duplicate untracked credentials; mark unresolved attempts for reconciliation.\n- [ ] Test expiration, cancellation, revoke/renew races and recovery after worker crash using fenced claims.\n- [ ] An expired database lease does not mean the backend credential is revoked; report pending/failed revocation until verified.\n\n## Dependencies\n\nSEC-AUTH-003, SEC-KV-002\n\n## Design references\n\n[Architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) \u00b7 [Integration matrix](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/integration-matrix.md) \u00b7 [Security](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/security.md).\n",
+    "labels": [
+      "type:story",
+      "area:dyn",
+      "phase:p2",
+      "effort:l"
+    ]
+  },
+  {
+    "id": "SEC-DYN-002",
+    "title": "[SEC-DYN-002] Implement PostgreSQL credential adapter",
+    "body": "<!-- falcone-secrets:SEC-DYN-002 -->\n\nParent: SEC-DYN\n\n## User story\n\nAs a data-service owner, I want scoped dynamic PostgreSQL identities, so that database activity has accountable least-privilege credentials.\n\n## Description\n\nScoped dynamic PostgreSQL identities.\n\nPhase: P2 \u00b7 Effort: L\n\n## Requirements\n\n- **FR-DYN-002-1**: The PostgreSQL adapter must create and revoke credentials through approved role templates with tenant/workspace and RLS-compatible privileges.\n- **FR-DYN-002-2**: Provider administration credentials must be separated from issued workload credentials and limited to approved lifecycle operations.\n\n## Acceptance criteria\n\n- [ ] Test login expiry, pooling/session behavior, active-session termination policy and schema/role privileges; never give workload users ownership or superuser rights.\n- [ ] Escape identifiers through vetted APIs/templates and reject tenant-supplied arbitrary SQL for role creation/revocation.\n- [ ] Reconcile orphan roles after ambiguous create/drop outcomes and provider outage; keep credential bytes out of history and audit.\n\n## Dependencies\n\nSEC-DYN-001\n\n## Design references\n\n[Architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) \u00b7 [Integration matrix](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/integration-matrix.md) \u00b7 [Security](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/security.md).\n",
+    "labels": [
+      "type:story",
+      "area:dyn",
+      "phase:p2",
+      "effort:l"
+    ]
+  },
+  {
+    "id": "SEC-DYN-003",
+    "title": "[SEC-DYN-003] Qualify S3, event and external-provider credential adapters",
+    "body": "<!-- falcone-secrets:SEC-DYN-003 -->\n\nParent: SEC-DYN\n\n## User story\n\nAs an integration owner, I want a capability matrix for backend credential lifecycle, so that unsupported TTL or rotation behavior is visible.\n\n## Description\n\nA capability matrix for backend credential lifecycle.\n\nPhase: P2 \u00b7 Effort: L\n\n## Requirements\n\n- **FR-DYN-003-1**: Every provider adapter must declare issuance, renewal, overlap, expiry and revocation capabilities and reject unsupported guarantees.\n- **FR-DYN-003-2**: SeaweedFS, Kafka-compatible eventing and external-provider credential integrations must preserve Falcone resource-scoping rules.\n\n## Acceptance criteria\n\n- [ ] Preserve per-bucket S3 grants and verify actual SeaweedFS release/mode behavior; do not assume AWS STS equivalence.\n- [ ] Distinguish broker ACL changes, static-password rotation and true dynamic credentials; test connection reuse after revoke.\n- [ ] External providers without a rotation API use an explicit operator-supplied replacement flow and do not receive fabricated automatic-rotation support.\n\n## Dependencies\n\nSEC-DYN-001, SEC-CON-001\n\n## Design references\n\n[Architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) \u00b7 [Integration matrix](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/integration-matrix.md) \u00b7 [Security](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/security.md).\n",
+    "labels": [
+      "type:story",
+      "area:dyn",
+      "phase:p2",
+      "effort:l"
+    ]
+  },
+  {
+    "id": "SEC-ROT",
+    "title": "[Epic][SEC-ROT] Rotation and consumer convergence",
+    "body": "<!-- falcone-secrets:SEC-ROT -->\n\n## Outcome\n\nCoordinate secret-version changes with real target activation and authenticated consumer evidence.\n\n## Scope\n\nCustom Falcone secret management, preserving Falcone contracts and tenant/workspace boundaries. See [architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) and [requirements](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/requirements.md).\n\n## Stories\n\n- [ ] SEC-ROT-001: Implement resumable rotation orchestration\n- [ ] SEC-ROT-002: Implement authenticated acknowledgements and convergence status\n- [ ] SEC-ROT-003: Implement grace expiry, revocation and stalled-work recovery\n\n## Exit criteria\n\nAll child criteria have linked evidence and the security/integration impact is reviewed. Planning publication does not mean implementation is complete.\n",
+    "labels": [
+      "type:epic",
+      "area:rot"
+    ]
+  },
+  {
+    "id": "SEC-ROT-001",
+    "title": "[SEC-ROT-001] Implement resumable rotation orchestration",
+    "body": "<!-- falcone-secrets:SEC-ROT-001 -->\n\nParent: SEC-ROT\n\n## User story\n\nAs a service operator, I want a durable staged rotation operation, so that partial failures cannot leave the platform silently inconsistent.\n\n## Description\n\nA durable staged rotation operation.\n\nPhase: P1 \u00b7 Effort: L\n\n## Requirements\n\n- **FR-ROT-001-1**: Rotation must use a persisted state machine for prepare, provider activation, consumer delivery, acknowledgement and old-credential revocation.\n- **FR-ROT-001-2**: Local secret/version changes and propagation intent must commit atomically while external provider effects use fenced, retryable reconciliation.\n\n## Acceptance criteria\n\n- [ ] Map current active/grace/expired/revoked states and API grace limits to internal operation states without silently changing contracts.\n- [ ] Serialize or fence overlapping rotations of one resource and test crash/timeout at every provider/commit boundary.\n- [ ] Preserve justified force/immediate paths with explicit consequences; do not claim database transactions make external credential changes atomic.\n\n## Dependencies\n\nSEC-KV-002, SEC-AUTH-001\n\n## Design references\n\n[Architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) \u00b7 [Integration matrix](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/integration-matrix.md) \u00b7 [Security](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/security.md).\n",
+    "labels": [
+      "type:story",
+      "area:rot",
+      "phase:p1",
+      "effort:l"
+    ]
+  },
+  {
+    "id": "SEC-ROT-002",
+    "title": "[SEC-ROT-002] Implement authenticated acknowledgements and convergence status",
+    "body": "<!-- falcone-secrets:SEC-ROT-002 -->\n\nParent: SEC-ROT\n\n## User story\n\nAs a rotation owner, I want per-consumer adoption evidence, so that a successful store write is not mistaken for completed rollout.\n\n## Description\n\nPer-consumer adoption evidence.\n\nPhase: P2 \u00b7 Effort: L\n\n## Requirements\n\n- **FR-ROT-002-1**: Only the registered authenticated consumer for the correct tenant/resource/version may acknowledge receipt or successful reload.\n- **FR-ROT-002-2**: Rotation status must distinguish persisted, delivered, loaded, validated and revoked outcomes with consumer deadlines and retryable failures.\n\n## Acceptance criteria\n\n- [ ] Preserve principal-to-consumer matching and reject forged IDs, cross-tenant ACKs, stale versions and unregistered consumers.\n- [ ] Treat Kubernetes Secret update as delivery only; environment-variable consumers require rollout/reload and validation before acknowledgement.\n- [ ] Expose missing-consumer and timeout status in the Falcone console; force completion is an audited exception, not evidence of successful adoption.\n\n## Dependencies\n\nSEC-ROT-001, SEC-DEL-001\n\n## Design references\n\n[Architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) \u00b7 [Integration matrix](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/integration-matrix.md) \u00b7 [Security](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/security.md).\n",
+    "labels": [
+      "type:story",
+      "area:rot",
+      "phase:p2",
+      "effort:l"
+    ]
+  },
+  {
+    "id": "SEC-ROT-003",
+    "title": "[SEC-ROT-003] Implement grace expiry, revocation and stalled-work recovery",
+    "body": "<!-- falcone-secrets:SEC-ROT-003 -->\n\nParent: SEC-ROT\n\n## User story\n\nAs an on-call engineer, I want bounded grace and visible failed revocation, so that old credentials do not remain active indefinitely without notice.\n\n## Description\n\nBounded grace and visible failed revocation.\n\nPhase: P2 \u00b7 Effort: L\n\n## Requirements\n\n- **FR-ROT-003-1**: Grace expiry and revocation jobs must persist deadlines and survive restarts, duplicate delivery and clock-skew limits.\n- **FR-ROT-003-2**: Old credential revocation must be verified per backend and unresolved operations must remain visible for operator action.\n\n## Acceptance criteria\n\n- [ ] Test offline consumer, provider outage, database failover, duplicate job and revoke/renew races with leases and fencing.\n- [ ] Emergency revoke can prioritize access removal over availability; planned grace completion requires configured adoption evidence.\n- [ ] Document that deleting stored bytes or disabling reads cannot recall a credential already copied by a process; rotate at its accepting backend.\n\n## Dependencies\n\nSEC-ROT-002, SEC-DYN-001, SEC-AUD-002\n\n## Design references\n\n[Architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) \u00b7 [Integration matrix](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/integration-matrix.md) \u00b7 [Security](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/security.md).\n",
+    "labels": [
+      "type:story",
+      "area:rot",
+      "phase:p2",
+      "effort:l"
+    ]
+  },
+  {
+    "id": "SEC-DEL",
+    "title": "[Epic][SEC-DEL] Secret delivery and workload confinement",
+    "body": "<!-- falcone-secrets:SEC-DEL -->\n\n## Outcome\n\nDeliver only authorized material through existing Falcone execution and deployment boundaries.\n\n## Scope\n\nCustom Falcone secret management, preserving Falcone contracts and tenant/workspace boundaries. See [architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) and [requirements](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/requirements.md).\n\n## Stories\n\n- [ ] SEC-DEL-001: Implement namespaced delivery and optional ESO adapters\n- [ ] SEC-DEL-002: Integrate trusted serverless hosts and function projections\n- [ ] SEC-DEL-003: Integrate workflow activities and execution credential references\n\n## Exit criteria\n\nAll child criteria have linked evidence and the security/integration impact is reviewed. Planning publication does not mean implementation is complete.\n",
+    "labels": [
+      "type:epic",
+      "area:del"
+    ]
+  },
+  {
+    "id": "SEC-DEL-001",
+    "title": "[SEC-DEL-001] Implement namespaced delivery and optional ESO adapters",
+    "body": "<!-- falcone-secrets:SEC-DEL-001 -->\n\nParent: SEC-DEL\n\n## User story\n\nAs a platform operator, I want secret delivery without a mandatory new operator, so that the service can run in restricted OpenShift environments.\n\n## Description\n\nSecret delivery without a mandatory new operator.\n\nPhase: P1 \u00b7 Effort: L\n\n## Requirements\n\n- **FR-DEL-001-1**: The baseline delivery path must use approved SDK/host-side resolution or a namespace-scoped projector without requiring new CRDs or cluster-wide privileges.\n- **FR-DEL-001-2**: Existing ESO consumers must have a tested explicit provider adapter or limited compatibility surface before their OpenBao backing store is removed.\n\n## Acceptance criteria\n\n- [ ] Inventory current ClusterSecretStore/ExternalSecret usage; retain approved installed ESO during migration but do not require installing it for the native baseline.\n- [ ] A namespace projector writes only owned approved Secret names and never honors arbitrary target paths or namespaces from a tenant.\n- [ ] Document Kubernetes Secret/etcd exposure and RBAC; mounted files may update, but environment variables require process restart and all delivery modes need adoption evidence.\n\n## Dependencies\n\nSEC-AUTH-003, SEC-KV-002\n\n## Design references\n\n[Architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) \u00b7 [Integration matrix](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/integration-matrix.md) \u00b7 [Security](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/security.md).\n",
+    "labels": [
+      "type:story",
+      "area:del",
+      "phase:p1",
+      "effort:l"
+    ]
+  },
+  {
+    "id": "SEC-DEL-002",
+    "title": "[SEC-DEL-002] Integrate trusted serverless hosts and function projections",
+    "body": "<!-- falcone-secrets:SEC-DEL-002 -->\n\nParent: SEC-DEL\n\n## User story\n\nAs a function developer, I want scoped secret handles in function execution, so that untrusted code cannot read platform or neighboring secrets.\n\n## Description\n\nScoped secret handles in function execution.\n\nPhase: P2 \u00b7 Effort: L\n\n## Requirements\n\n- **FR-DEL-002-1**: Current function deployment must preserve named secret declarations and owned secretKeyRef projection without embedding values in pod specs or saved revisions.\n- **FR-DEL-002-2**: Native serverless secret resolution must follow approved host/shim and per-attempt identity contracts without exposing host credentials to guest code.\n\n## Acceptance criteria\n\n- [ ] Test missing/deleted references, simultaneous deploy/rotate/delete, stale revisions and cross-pool/workspace attempts.\n- [ ] Preserve serverless ADR status and the existing ESO-delivery proposal until separately reviewed; do not silently replace its host trust design.\n- [ ] For approved narrow guest grants, document that code receiving plaintext can exfiltrate it; use host-mediated operations where the application permits.\n\n## Dependencies\n\nSEC-DEL-001, SEC-ROT-002\n\n## Design references\n\n[Architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) \u00b7 [Integration matrix](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/integration-matrix.md) \u00b7 [Security](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/security.md).\n",
+    "labels": [
+      "type:story",
+      "area:del",
+      "phase:p2",
+      "effort:l"
+    ]
+  },
+  {
+    "id": "SEC-DEL-003",
+    "title": "[SEC-DEL-003] Integrate workflow activities and execution credential references",
+    "body": "<!-- falcone-secrets:SEC-DEL-003 -->\n\nParent: SEC-DEL\n\n## User story\n\nAs a workflow author, I want freshly authorized secrets at activity boundaries, so that long-running execution does not persist reusable secrets in history.\n\n## Description\n\nFreshly authorized secrets at activity boundaries.\n\nPhase: P2 \u00b7 Effort: L\n\n## Requirements\n\n- **FR-DEL-003-1**: Temporal-era and native workflow adapters must resolve secret references only for the verified tenant/workspace and authoritative execution lineage.\n- **FR-DEL-003-2**: Workflow histories, checkpoints, retries and task payloads must not contain resolved secret values or reusable bearer credentials.\n\n## Acceptance criteria\n\n- [ ] Test paused/retried workflows beyond token expiry, cancellation, reset/run lineage and unauthorized reference reuse.\n- [ ] Define pinned-versus-current secret version semantics explicitly; a pinned reference does not override revocation or extend lease lifetime.\n- [ ] Keep IAM token issuance and workflow lineage ownership separate from secret custody; encrypt any retained platform credential records and avoid bearer handles in logs.\n\n## Dependencies\n\nSEC-DEL-001, SEC-DYN-001\n\n## Design references\n\n[Architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) \u00b7 [Integration matrix](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/integration-matrix.md) \u00b7 [Security](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/security.md).\n",
+    "labels": [
+      "type:story",
+      "area:del",
+      "phase:p2",
+      "effort:l"
+    ]
+  },
+  {
+    "id": "SEC-INT",
+    "title": "[Epic][SEC-INT] Falcone product and infrastructure integrations",
+    "body": "<!-- falcone-secrets:SEC-INT -->\n\n## Outcome\n\nPreserve native consumers including BYOK and independent key lifecycles.\n\n## Scope\n\nCustom Falcone secret management, preserving Falcone contracts and tenant/workspace boundaries. See [architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) and [requirements](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/requirements.md).\n\n## Stories\n\n- [ ] SEC-INT-001: Integrate gateway, consoles, SDKs and provisioning\n- [ ] SEC-INT-002: Integrate BYOK and provider credential brokers\n- [ ] SEC-INT-003: Integrate webhook, IAM and platform key lifecycles\n\n## Exit criteria\n\nAll child criteria have linked evidence and the security/integration impact is reviewed. Planning publication does not mean implementation is complete.\n",
+    "labels": [
+      "type:epic",
+      "area:int"
+    ]
+  },
+  {
+    "id": "SEC-INT-001",
+    "title": "[SEC-INT-001] Integrate gateway, consoles, SDKs and provisioning",
+    "body": "<!-- falcone-secrets:SEC-INT-001 -->\n\nParent: SEC-INT\n\n## User story\n\nAs a Falcone user, I want consistent secret administration through existing interfaces, so that the backend replacement is transparent to supported clients.\n\n## Description\n\nConsistent secret administration through existing interfaces.\n\nPhase: P2 \u00b7 Effort: L\n\n## Requirements\n\n- **FR-INT-001-1**: APISIX, both control-plane paths, consoles and supported SDKs must preserve approved Falcone secret metadata and lifecycle contracts.\n- **FR-INT-001-2**: Provisioning and quota integrations must use Falcone ownership and accounting decisions without duplicating user or billing databases.\n\n## Acceptance criteria\n\n- [ ] Test gateway/header trust, secret inventory pagination, write-only forms, cleared input state and existing degraded-backend errors.\n- [ ] Preserve config.secretRefs and bootstrap-created/adopted Kubernetes Secret keys; never print values in Helm templates, diffs or releases.\n- [ ] Publish compatibility fixtures for existing provider-neutral adapters and explicit schema versions for new internal methods.\n\n## Dependencies\n\nSEC-KV-003, SEC-ROT-002\n\n## Design references\n\n[Architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) \u00b7 [Integration matrix](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/integration-matrix.md) \u00b7 [Security](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/security.md).\n",
+    "labels": [
+      "type:story",
+      "area:int",
+      "phase:p2",
+      "effort:l"
+    ]
+  },
+  {
+    "id": "SEC-INT-002",
+    "title": "[SEC-INT-002] Integrate BYOK and provider credential brokers",
+    "body": "<!-- falcone-secrets:SEC-INT-002 -->\n\nParent: SEC-INT\n\n## User story\n\nAs a workspace owner, I want provider credentials confined to the connection scope, so that LLM requests cannot leak unrelated secrets.\n\n## Description\n\nProvider credentials confined to the connection scope.\n\nPhase: P2 \u00b7 Effort: L\n\n## Requirements\n\n- **FR-INT-002-1**: LLM/embedding secret resolution must preserve workspaceSecret and approved reserved-env reference rules and endpoint confinement.\n- **FR-INT-002-2**: Provider token caches must be scoped to connection identity/version and be invalidated on credential rotation, permission loss or endpoint changes.\n\n## Acceptance criteria\n\n- [ ] Resolve under authoritative connection/execution scope, not a worker default; reject mixed references and cross-workspace reads.\n- [ ] Preserve SSRF, TLS and redirect checks before sending resolved credentials; changing the secrets backend must not widen destination trust.\n- [ ] Test current fetch-per-request keys separately from short-lived exchanged token caches, workflow-worker gaps and failed provider refresh without logging credentials.\n\n## Dependencies\n\nSEC-DEL-001, SEC-AUTH-002\n\n## Design references\n\n[Architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) \u00b7 [Integration matrix](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/integration-matrix.md) \u00b7 [Security](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/security.md).\n",
+    "labels": [
+      "type:story",
+      "area:int",
+      "phase:p2",
+      "effort:l"
+    ]
+  },
+  {
+    "id": "SEC-INT-003",
+    "title": "[SEC-INT-003] Integrate webhook, IAM and platform key lifecycles",
+    "body": "<!-- falcone-secrets:SEC-INT-003 -->\n\nParent: SEC-INT\n\n## User story\n\nAs a platform security owner, I want explicit adapters for independently managed keys, so that migration cannot make encrypted state unrecoverable.\n\n## Description\n\nExplicit adapters for independently managed keys.\n\nPhase: P2 \u00b7 Effort: L\n\n## Requirements\n\n- **FR-INT-003-1**: Platform webhook master keys, flow-trigger keys, IAM signing/federation secrets and platform database credentials must retain their distinct lifecycle and recovery contracts.\n- **FR-INT-003-2**: Migration of a non-OpenBao key custodian must require a versioned adapter and paired ciphertext/key recovery evidence before changing its source.\n\n## Acceptance criteria\n\n- [ ] Preserve the existing webhook lifecycle contract and its draft/qualification status; no external-manager in-place mutation is assumed safe.\n- [ ] Separate IAM-owned password verifiers/API-key hashes from recoverable bytes; keep SAML/OIDC/LDAP/AD/SCIM protocol implementation inside IAM.\n- [ ] Test old/new ciphertext readability, application startup checks, backup key matching and provider identity rotation; do not rotate platform roots as ordinary tenant values.\n\n## Dependencies\n\nSEC-SIG-001, SEC-BOOT-002, SEC-CON-001\n\n## Design references\n\n[Architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) \u00b7 [Integration matrix](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/integration-matrix.md) \u00b7 [Security](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/security.md).\n",
+    "labels": [
+      "type:story",
+      "area:int",
+      "phase:p2",
+      "effort:l"
+    ]
+  },
+  {
+    "id": "SEC-SIG",
+    "title": "[Epic][SEC-SIG] Cryptographic operations and certificate custody",
+    "body": "<!-- falcone-secrets:SEC-SIG -->\n\n## Outcome\n\nOffer reviewed key operations without turning secrets into an unrestricted signing oracle.\n\n## Scope\n\nCustom Falcone secret management, preserving Falcone contracts and tenant/workspace boundaries. See [architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) and [requirements](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/requirements.md).\n\n## Stories\n\n- [ ] SEC-SIG-001: Implement purpose-bound signing and verification\n- [ ] SEC-SIG-002: Implement transit encryption and data-key operations\n- [ ] SEC-SIG-003: Qualify certificate custody and optional CA integration\n\n## Exit criteria\n\nAll child criteria have linked evidence and the security/integration impact is reviewed. Planning publication does not mean implementation is complete.\n",
+    "labels": [
+      "type:epic",
+      "area:sig"
+    ]
+  },
+  {
+    "id": "SEC-SIG-001",
+    "title": "[SEC-SIG-001] Implement purpose-bound signing and verification",
+    "body": "<!-- falcone-secrets:SEC-SIG-001 -->\n\nParent: SEC-SIG\n\n## User story\n\nAs an IAM service owner, I want managed signing operations with exact key policy, so that authentication keys stay outside ordinary application runtimes.\n\n## Description\n\nManaged signing operations with exact key policy.\n\nPhase: P2 \u00b7 Effort: L\n\n## Requirements\n\n- **FR-SIG-001-1**: Signing APIs must bind key purpose, caller, allowed algorithms and message context, with separate permissions for use and administration.\n- **FR-SIG-001-2**: IAM integration must publish compatible public key metadata and support tested signing-key rotation without exposing private keys to tenants.\n\n## Acceptance criteria\n\n- [ ] Qualify the actual IAM protocol-library remote-signing adapter; encrypted key export is a distinct documented fallback, not non-exportable signing.\n- [ ] Protect bootstrap signing with exact key and message-purpose constraints, including validated IAM token/header fields where relevant.\n- [ ] Test cross-purpose signing, algorithm confusion, key retirement, verification overlap and compromise handling; no generic unrestricted root signer.\n\n## Dependencies\n\nSEC-KEY-002, SEC-BOOT-002, SEC-AUTH-001\n\n## Design references\n\n[Architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) \u00b7 [Integration matrix](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/integration-matrix.md) \u00b7 [Security](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/security.md).\n",
+    "labels": [
+      "type:story",
+      "area:sig",
+      "phase:p2",
+      "effort:l"
+    ]
+  },
+  {
+    "id": "SEC-SIG-002",
+    "title": "[SEC-SIG-002] Implement transit encryption and data-key operations",
+    "body": "<!-- falcone-secrets:SEC-SIG-002 -->\n\nParent: SEC-SIG\n\n## User story\n\nAs an application developer, I want scoped encryption operations using managed keys, so that sensitive application payloads can remain encrypted outside the secret store.\n\n## Description\n\nScoped encryption operations using managed keys.\n\nPhase: P2 \u00b7 Effort: L\n\n## Requirements\n\n- **FR-SIG-002-1**: Transit encrypt/decrypt, data-key generation and rewrap must use versioned authenticated formats with resource/context binding and explicit permissions.\n- **FR-SIG-002-2**: Transit services must not persist caller plaintext and must separate plaintext-returning operations from ciphertext-only rewrapping.\n\n## Acceptance criteria\n\n- [ ] Test altered context, cross-tenant ciphertext, retired keys and idempotent retries without nonce reuse; disable convergent encryption by default.\n- [ ] Set bounded message sizes and request quotas; no arbitrary large-file encryption service is implied.\n- [ ] Differentiate opaque application ciphertext from stored KV values and retain old-key/backups evidence before key retirement.\n\n## Dependencies\n\nSEC-KEY-002, SEC-AUTH-001\n\n## Design references\n\n[Architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) \u00b7 [Integration matrix](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/integration-matrix.md) \u00b7 [Security](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/security.md).\n",
+    "labels": [
+      "type:story",
+      "area:sig",
+      "phase:p2",
+      "effort:l"
+    ]
+  },
+  {
+    "id": "SEC-SIG-003",
+    "title": "[SEC-SIG-003] Qualify certificate custody and optional CA integration",
+    "body": "<!-- falcone-secrets:SEC-SIG-003 -->\n\nParent: SEC-SIG\n\n## User story\n\nAs a platform TLS operator, I want a supported certificate lifecycle boundary, so that TLS renewal and key custody remain recoverable.\n\n## Description\n\nA supported certificate lifecycle boundary.\n\nPhase: P2 \u00b7 Effort: M\n\n## Requirements\n\n- **FR-SIG-003-1**: The system must support scoped storage and delivery of certificate/private-key pairs with expiry metadata and validated ownership.\n- **FR-SIG-003-2**: Any enabled certificate issuance adapter must restrict names, usages, TTL and issuer authority and expose renewal/revocation limitations.\n\n## Acceptance criteria\n\n- [ ] Integrate existing approved cert-manager or external CA paths without requiring a new operator or replacing the root CA.\n- [ ] Publish a capability decision for optional step-ca/PKI and SSH signing; these extensions are not assumed required for OpenBao retirement unless inventory proves current use.\n- [ ] Test pair mismatch, expiry alert, rollout and recovery; offline certificate verification does not provide universal instant revocation.\n\n## Dependencies\n\nSEC-KEY-001, SEC-CON-001\n\n## Design references\n\n[Architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) \u00b7 [Integration matrix](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/integration-matrix.md) \u00b7 [Security](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/security.md).\n",
+    "labels": [
+      "type:story",
+      "area:sig",
+      "phase:p2",
+      "effort:m"
+    ]
+  },
+  {
+    "id": "SEC-AUD",
+    "title": "[Epic][SEC-AUD] Audit, durable events and observability",
+    "body": "<!-- falcone-secrets:SEC-AUD -->\n\n## Outcome\n\nRecord security actions durably without turning evidence into a second secret store.\n\n## Scope\n\nCustom Falcone secret management, preserving Falcone contracts and tenant/workspace boundaries. See [architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) and [requirements](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/requirements.md).\n\n## Stories\n\n- [ ] SEC-AUD-001: Implement value-free audit and read-release evidence\n- [ ] SEC-AUD-002: Implement transactional outbox and reconciliation workers\n- [ ] SEC-AUD-003: Implement metrics, inventory alerts and audit retention\n\n## Exit criteria\n\nAll child criteria have linked evidence and the security/integration impact is reviewed. Planning publication does not mean implementation is complete.\n",
+    "labels": [
+      "type:epic",
+      "area:aud"
+    ]
+  },
+  {
+    "id": "SEC-AUD-001",
+    "title": "[SEC-AUD-001] Implement value-free audit and read-release evidence",
+    "body": "<!-- falcone-secrets:SEC-AUD-001 -->\n\nParent: SEC-AUD\n\n## User story\n\nAs a security auditor, I want durable correlated access records, so that sensitive value access can be investigated.\n\n## Description\n\nDurable correlated access records.\n\nPhase: P1 \u00b7 Effort: L\n\n## Requirements\n\n- **FR-AUD-001-1**: Sensitive reads, writes, decrypt/sign operations and denied access must emit scoped audit records without plaintext values, reusable credentials or request bodies.\n- **FR-AUD-001-2**: Security mutations must atomically accept audit records, and value release must fail safely if its required durable audit acceptance cannot be recorded.\n\n## Acceptance criteria\n\n- [ ] Preserve approved SecretAuditEvent fields through versioned mapping, including legacy vaultRequestId where needed; free-text fields are sanitized.\n- [ ] Audit intent is committed before value release and outcome after; a disconnect after send is recorded as unknown delivery rather than a false success.\n- [ ] Tenant administrators cannot rewrite audit history; test read-path durability, leak fixtures, correlation and cross-tenant export denial.\n\n## Dependencies\n\nSEC-CON-002, SEC-AUTH-001\n\n## Design references\n\n[Architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) \u00b7 [Integration matrix](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/integration-matrix.md) \u00b7 [Security](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/security.md).\n",
+    "labels": [
+      "type:story",
+      "area:aud",
+      "phase:p1",
+      "effort:l"
+    ]
+  },
+  {
+    "id": "SEC-AUD-002",
+    "title": "[SEC-AUD-002] Implement transactional outbox and reconciliation workers",
+    "body": "<!-- falcone-secrets:SEC-AUD-002 -->\n\nParent: SEC-AUD\n\n## User story\n\nAs an operator, I want durable versioned lifecycle events, so that broker outages and duplicate delivery cannot lose security changes.\n\n## Description\n\nDurable versioned lifecycle events.\n\nPhase: P1 \u00b7 Effort: L\n\n## Requirements\n\n- **FR-AUD-002-1**: Metadata changes and propagation intent must commit in one PostgreSQL transaction and deliver through the existing event bus with at-least-once semantics.\n- **FR-AUD-002-2**: Workers must use idempotency, aggregate revisions and fenced claims to prevent stale rotations or events from resurrecting revoked state.\n\n## Acceptance criteria\n\n- [ ] Crash before/after commit, publish and ACK without secret loss or duplicate logical effects; event payloads contain identifiers only.\n- [ ] Implement backoff, dead-letter handling and authorized replay with reconciliation rather than assuming exactly-once provider effects.\n- [ ] Event backlog capacity and IAM freshness failures are explicit; Kafka availability is not required to decrypt an already authorized request with durable local audit.\n\n## Dependencies\n\nSEC-AUD-001, SEC-KV-002\n\n## Design references\n\n[Architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) \u00b7 [Integration matrix](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/integration-matrix.md) \u00b7 [Security](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/security.md).\n",
+    "labels": [
+      "type:story",
+      "area:aud",
+      "phase:p1",
+      "effort:l"
+    ]
+  },
+  {
+    "id": "SEC-AUD-003",
+    "title": "[SEC-AUD-003] Implement metrics, inventory alerts and audit retention",
+    "body": "<!-- falcone-secrets:SEC-AUD-003 -->\n\nParent: SEC-AUD\n\n## User story\n\nAs an on-call engineer, I want redacted diagnostics and lifecycle alerts, so that secret failures are visible before dependent workloads fail.\n\n## Description\n\nRedacted diagnostics and lifecycle alerts.\n\nPhase: P2 \u00b7 Effort: M\n\n## Requirements\n\n- **FR-AUD-003-1**: The service must expose bounded-cardinality metrics for key/seal state, auth freshness, leases, rotation adoption, failed revocation and audit backlog.\n- **FR-AUD-003-2**: Audit and metadata retention/export must enforce Falcone tenant permissions and an approved privacy/retention policy.\n\n## Acceptance criteria\n\n- [ ] Separate expected denies from service errors and report consumer/target progress without secret-name or user-ID metric explosions.\n- [ ] Alert on stale auth, expiring provider identity, stalled rotation, orphan lease, root-key loss and certificate expiry with runbooks.\n- [ ] Test sanctioned audit export and protected external anchoring/tamper evidence; a database hash chain alone is not proof against an administrator who controls all copies.\n\n## Dependencies\n\nSEC-AUD-002, SEC-OPS-002\n\n## Design references\n\n[Architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) \u00b7 [Integration matrix](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/integration-matrix.md) \u00b7 [Security](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/security.md).\n",
+    "labels": [
+      "type:story",
+      "area:aud",
+      "phase:p2",
+      "effort:m"
+    ]
+  },
+  {
+    "id": "SEC-OPS",
+    "title": "[Epic][SEC-OPS] Restricted deployment and reliable operation",
+    "body": "<!-- falcone-secrets:SEC-OPS -->\n\n## Outcome\n\nOperate a native service on Kubernetes/OpenShift with explicit custody and recovery ownership.\n\n## Scope\n\nCustom Falcone secret management, preserving Falcone contracts and tenant/workspace boundaries. See [architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) and [requirements](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/requirements.md).\n\n## Stories\n\n- [ ] SEC-OPS-001: Package restricted namespace deployments\n- [ ] SEC-OPS-002: Benchmark and agree service objectives\n- [ ] SEC-OPS-003: Implement backups, restore, upgrades and ownership\n\n## Exit criteria\n\nAll child criteria have linked evidence and the security/integration impact is reviewed. Planning publication does not mean implementation is complete.\n",
+    "labels": [
+      "type:epic",
+      "area:ops"
+    ]
+  },
+  {
+    "id": "SEC-OPS-001",
+    "title": "[SEC-OPS-001] Package restricted namespace deployments",
+    "body": "<!-- falcone-secrets:SEC-OPS-001 -->\n\nParent: SEC-OPS\n\n## User story\n\nAs a platform operator, I want reproducible nonprivileged deployment artifacts, so that corporate OpenShift can run the service without a new cluster operator.\n\n## Description\n\nReproducible nonprivileged deployment artifacts.\n\nPhase: P1 \u00b7 Effort: M\n\n## Requirements\n\n- **FR-OPS-001-1**: Baseline workloads must run as arbitrary non-root UID with dropped capabilities, restricted mounts and no privileged containers, host access or new CRDs.\n- **FR-OPS-001-2**: Installation must document external database, root-key provider, TLS, eventing, audit and bootstrap prerequisites and their precise permissions.\n\n## Acceptance criteria\n\n- [ ] Provide API/worker roles, probes, network policy, graceful shutdown, rolling migrations and bounded temporary storage.\n- [ ] Qualify administrator-approved Kubernetes minors and exact OpenShift build; do not infer product support from Kubernetes patch numbers alone.\n- [ ] Do not require mlock capabilities or promise protection against cluster administrators; qualify process/core-dump/swap behavior under available policy.\n\n## Dependencies\n\nSEC-BOOT-002, SEC-KEY-001\n\n## Design references\n\n[Architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) \u00b7 [Integration matrix](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/integration-matrix.md) \u00b7 [Security](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/security.md).\n",
+    "labels": [
+      "type:story",
+      "area:ops",
+      "phase:p1",
+      "effort:m"
+    ]
+  },
+  {
+    "id": "SEC-OPS-002",
+    "title": "[SEC-OPS-002] Benchmark and agree service objectives",
+    "body": "<!-- falcone-secrets:SEC-OPS-002 -->\n\nParent: SEC-OPS\n\n## User story\n\nAs a product owner, I want separate measured secret-service objectives, so that capacity reflects secret operations instead of event throughput.\n\n## Description\n\nSeparate measured secret-service objectives.\n\nPhase: P0 \u00b7 Effort: M\n\n## Requirements\n\n- **FR-OPS-002-1**: The project must benchmark metadata, resolution, key use, lease issuance and rotation/consumer adoption separately under a documented workload.\n- **FR-OPS-002-2**: Availability, latency, freshness, recovery and data-loss objectives must state topology, dependency boundaries and measurement assumptions.\n\n## Acceptance criteria\n\n- [ ] Use operations.md targets as hypotheses and include cold KMS calls, audit commit cost, tenant skew and provider outages.\n- [ ] Do not interpret 10,000 deployed functions or 100k event messages per second as secret-read or signing QPS.\n- [ ] Determine replica, database and key-provider capacity from measured concurrency and payload size before accepting an SLA.\n\n## Dependencies\n\nSEC-CON-001\n\n## Design references\n\n[Architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) \u00b7 [Integration matrix](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/integration-matrix.md) \u00b7 [Security](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/security.md).\n",
+    "labels": [
+      "type:story",
+      "area:ops",
+      "phase:p0",
+      "effort:m"
+    ]
+  },
+  {
+    "id": "SEC-OPS-003",
+    "title": "[SEC-OPS-003] Implement backups, restore, upgrades and ownership",
+    "body": "<!-- falcone-secrets:SEC-OPS-003 -->\n\nParent: SEC-OPS\n\n## User story\n\nAs an SRE, I want tested restoration with the matching key material, so that a disaster does not restore inaccessible or previously revoked credentials.\n\n## Description\n\nTested restoration with the matching key material.\n\nPhase: P2 \u00b7 Effort: L\n\n## Requirements\n\n- **FR-OPS-003-1**: Backup and restore procedures must coordinate ciphertext, metadata, key versions, revocation state, outstanding leases and consumer state.\n- **FR-OPS-003-2**: Production release must name runtime, on-call, key-custody and independent security-qualification owners.\n\n## Acceptance criteria\n\n- [ ] Restore in an isolated environment with egress blocked; reconcile actual backend credentials and IAM epochs before enabling resolution or rotation.\n- [ ] Test PITR, missing old KEK, incompatible schema and outstanding external leases; no rollback silently revives revoked credentials.\n- [ ] Exercise root-key compromise, KMS outage, IAM unavailable and broker/database failure with measured RPO/RTO and reviewed upgrade runbooks.\n\n## Dependencies\n\nSEC-OPS-001, SEC-BOOT-003, SEC-ROT-003\n\n## Design references\n\n[Architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) \u00b7 [Integration matrix](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/integration-matrix.md) \u00b7 [Security](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/security.md).\n",
+    "labels": [
+      "type:story",
+      "area:ops",
+      "phase:p2",
+      "effort:l"
+    ]
+  },
+  {
+    "id": "SEC-MIG",
+    "title": "[Epic][SEC-MIG] OpenBao migration and retirement",
+    "body": "<!-- falcone-secrets:SEC-MIG -->\n\n## Outcome\n\nMove by scoped consumer with one writer, controlled plaintext handling and explicit rollback.\n\n## Scope\n\nCustom Falcone secret management, preserving Falcone contracts and tenant/workspace boundaries. See [architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) and [requirements](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/requirements.md).\n\n## Stories\n\n- [ ] SEC-MIG-001: Build a dry-run inventory and controlled importer\n- [ ] SEC-MIG-002: Implement canary cutover and conflict-safe rollback\n- [ ] SEC-MIG-003: Retire OpenBao after evidence gates\n\n## Exit criteria\n\nAll child criteria have linked evidence and the security/integration impact is reviewed. Planning publication does not mean implementation is complete.\n",
+    "labels": [
+      "type:epic",
+      "area:mig"
+    ]
+  },
+  {
+    "id": "SEC-MIG-001",
+    "title": "[SEC-MIG-001] Build a dry-run inventory and controlled importer",
+    "body": "<!-- falcone-secrets:SEC-MIG-001 -->\n\nParent: SEC-MIG\n\n## User story\n\nAs a migration engineer, I want repeatable scoped import with sanitized evidence, so that OpenBao data moves without untracked exports.\n\n## Description\n\nRepeatable scoped import with sanitized evidence.\n\nPhase: P1 \u00b7 Effort: L\n\n## Requirements\n\n- **FR-MIG-001-1**: Migration tools must inventory secret/version metadata, auth policies, consumers, mounts, leases and special key engines without exposing values in reports.\n- **FR-MIG-001-2**: Value migration must use a scoped encrypted transfer channel, destination envelope encryption and resumable identity/version mapping.\n\n## Acceptance criteria\n\n- [ ] Dry runs report counts, unsupported engines and source/destination mappings; migration never reads private deployment credentials into planning artifacts.\n- [ ] Use protected equality checks or isolated canaries rather than public unsalted secret hashes; no plaintext export files or CI artifacts.\n- [ ] Classify non-exportable transit keys, active leases, PKI roots and separately managed webhook keys as explicit bridge/rotation blockers rather than assuming KV export covers them.\n\n## Dependencies\n\nSEC-CON-001, SEC-KV-002\n\n## Design references\n\n[Architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) \u00b7 [Integration matrix](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/integration-matrix.md) \u00b7 [Security](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/security.md).\n",
+    "labels": [
+      "type:story",
+      "area:mig",
+      "phase:p1",
+      "effort:l"
+    ]
+  },
+  {
+    "id": "SEC-MIG-002",
+    "title": "[SEC-MIG-002] Implement canary cutover and conflict-safe rollback",
+    "body": "<!-- falcone-secrets:SEC-MIG-002 -->\n\nParent: SEC-MIG\n\n## User story\n\nAs a rollout owner, I want fenced per-scope migration and consumer verification, so that a backend switch cannot lose rotations or widen access.\n\n## Description\n\nFenced per-scope migration and consumer verification.\n\nPhase: P3 \u00b7 Effort: L\n\n## Requirements\n\n- **FR-MIG-002-1**: Migration must maintain one authoritative writer per scope and record a cutover revision before changing resolver and projector routing.\n- **FR-MIG-002-2**: Canaries must verify value-free public contracts, scoped resolution, rotation, revocation and recovery for every enabled consumer.\n\n## Acceptance criteria\n\n- [ ] Shadow comparison performs no duplicate external credential issuance or rotation; freeze or reconcile writes before authority handoff.\n- [ ] Test both direct Falcone adapters and approved ESO compatibility paths, including adopted Kubernetes Secrets and provider auth renewal.\n- [ ] Rollback reconciles post-cutover values, leases and key changes; it is not an unconditional old database restore or automatic fallback after denied reads.\n\n## Dependencies\n\nSEC-MIG-001, SEC-INT-001, SEC-INT-002, SEC-INT-003, SEC-DEL-002, SEC-DEL-003, SEC-DEV-003\n\n## Design references\n\n[Architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) \u00b7 [Integration matrix](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/integration-matrix.md) \u00b7 [Security](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/security.md).\n",
+    "labels": [
+      "type:story",
+      "area:mig",
+      "phase:p3",
+      "effort:l"
+    ]
+  },
+  {
+    "id": "SEC-MIG-003",
+    "title": "[SEC-MIG-003] Retire OpenBao after evidence gates",
+    "body": "<!-- falcone-secrets:SEC-MIG-003 -->\n\nParent: SEC-MIG\n\n## User story\n\nAs a Falcone product owner, I want a controlled retirement checklist, so that the first-party service becomes the supported secret backend.\n\n## Description\n\nA controlled retirement checklist.\n\nPhase: P3 \u00b7 Effort: M\n\n## Requirements\n\n- **FR-MIG-003-1**: OpenBao retirement must require signed-off contract, consumer, custody, lease, cryptographic and disaster-recovery evidence for all in-use engines.\n- **FR-MIG-003-2**: Retirement must remove obsolete trust, credentials and backend routes only after the approved rollback and key-retention requirements are satisfied.\n\n## Acceptance criteria\n\n- [ ] No active consumer or non-exportable historical ciphertext remains dependent on OpenBao unless an explicitly scoped bridge postpones retirement.\n- [ ] Update deployment and sibling-service integration contracts through separately reviewed changes; this repository bootstrap does not modify those repositories.\n- [ ] Archive sanitized evidence, retain approved encrypted backups and key custody, and document residual exceptions and incident owners before production removal.\n\n## Dependencies\n\nSEC-MIG-002, SEC-OPS-003\n\n## Design references\n\n[Architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) \u00b7 [Integration matrix](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/integration-matrix.md) \u00b7 [Security](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/security.md).\n",
+    "labels": [
+      "type:story",
+      "area:mig",
+      "phase:p3",
+      "effort:m"
+    ]
+  },
+  {
+    "id": "SEC-DEV",
+    "title": "[Epic][SEC-DEV] Developer tooling and security qualification",
+    "body": "<!-- falcone-secrets:SEC-DEV -->\n\n## Outcome\n\nMake the custom service implementable and independently reviewable before production trust changes.\n\n## Scope\n\nCustom Falcone secret management, preserving Falcone contracts and tenant/workspace boundaries. See [architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) and [requirements](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/requirements.md).\n\n## Stories\n\n- [ ] SEC-DEV-001: Publish schemas, SDK adapters and local fixtures\n- [ ] SEC-DEV-002: Implement supply-chain and dependency release gates\n- [ ] SEC-DEV-003: Qualify isolation, cryptography and failure behavior\n\n## Exit criteria\n\nAll child criteria have linked evidence and the security/integration impact is reviewed. Planning publication does not mean implementation is complete.\n",
+    "labels": [
+      "type:epic",
+      "area:dev"
+    ]
+  },
+  {
+    "id": "SEC-DEV-001",
+    "title": "[SEC-DEV-001] Publish schemas, SDK adapters and local fixtures",
+    "body": "<!-- falcone-secrets:SEC-DEV-001 -->\n\nParent: SEC-DEV\n\n## User story\n\nAs an integration developer, I want versioned APIs and synthetic test setups, so that I can integrate without production secrets.\n\n## Description\n\nVersioned APIs and synthetic test setups.\n\nPhase: P1 \u00b7 Effort: M\n\n## Requirements\n\n- **FR-DEV-001-1**: The project must publish OpenAPI/event schemas and TypeScript/Go examples distinguishing metadata, value resolution, key use and lifecycle operations.\n- **FR-DEV-001-2**: Local fixtures must include multiple tenants, scoped workloads, rotation failures and synthetic secrets without embedding real or provider-shaped credentials.\n\n## Acceptance criteria\n\n- [ ] Preserve public route schemas while versioning new internal methods; examples never return values through workspace metadata routes.\n- [ ] Provide a local no-production-trust profile and explicit synthetic key custody; production startup rejects development bypasses.\n- [ ] Document SDK retry/idempotency semantics and safe file/stdin handling without placing secret bytes in shell arguments or generated manifests.\n\n## Dependencies\n\nSEC-CON-001, SEC-AUTH-002\n\n## Design references\n\n[Architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) \u00b7 [Integration matrix](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/integration-matrix.md) \u00b7 [Security](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/security.md).\n",
+    "labels": [
+      "type:story",
+      "area:dev",
+      "phase:p1",
+      "effort:m"
+    ]
+  },
+  {
+    "id": "SEC-DEV-002",
+    "title": "[SEC-DEV-002] Implement supply-chain and dependency release gates",
+    "body": "<!-- falcone-secrets:SEC-DEV-002 -->\n\nParent: SEC-DEV\n\n## User story\n\nAs a maintainer, I want attributable builds and maintained security dependencies, so that releases can be patched and reviewed.\n\n## Description\n\nAttributable builds and maintained security dependencies.\n\nPhase: P1 \u00b7 Effort: M\n\n## Requirements\n\n- **FR-DEV-002-1**: Release builds must pin dependencies, publish an SBOM and signed image provenance, and review protocol/crypto updates against compatibility tests.\n- **FR-DEV-002-2**: The project must define vulnerability reporting, patch ownership, dependency license review and secure diagnostic defaults.\n\n## Acceptance criteria\n\n- [ ] CI scans for secrets, vulnerable dependencies, license conflicts and unsafe image permissions with owned time-limited exceptions.\n- [ ] Choose the repository license before code distribution and preserve required notices for reused open-source components.\n- [ ] Document supported runtime/provider versions and migration notes; no upstream certification or compliance label is inherited automatically.\n\n## Dependencies\n\nSEC-CON-003\n\n## Design references\n\n[Architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) \u00b7 [Integration matrix](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/integration-matrix.md) \u00b7 [Security](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/security.md).\n",
+    "labels": [
+      "type:story",
+      "area:dev",
+      "phase:p1",
+      "effort:m"
+    ]
+  },
+  {
+    "id": "SEC-DEV-003",
+    "title": "[SEC-DEV-003] Qualify isolation, cryptography and failure behavior",
+    "body": "<!-- falcone-secrets:SEC-DEV-003 -->\n\nParent: SEC-DEV\n\n## User story\n\nAs a security reviewer, I want adversarial and recovery evidence, so that OpenBao is replaced only after the native service proves its boundaries.\n\n## Description\n\nAdversarial and recovery evidence.\n\nPhase: P2 \u00b7 Effort: L\n\n## Requirements\n\n- **FR-DEV-003-1**: A release candidate must pass cross-tenant, tamper, replay, stale-policy, secret-leakage and dependency-failure tests for all enabled engines and delivery paths.\n- **FR-DEV-003-2**: Production cutover must require independent security review of key custody, bootstrap, secret handling, authorization and external revocation guarantees.\n\n## Acceptance criteria\n\n- [ ] Test modified AAD/ciphertext, wrong-key signing, forged consumer ACK, path injection, untrusted guest input and SSRF during provider use.\n- [ ] Inject crashes around audit/DB commit, provider activation, outbox delivery and key rotation; verify declared failure and recovery behavior.\n- [ ] Record residual memory/cluster-admin exposure, evidence gaps and owned exceptions; container hardening is not hostile-code isolation or a compliance certificate.\n\n## Dependencies\n\nSEC-KEY-003, SEC-AUTH-003, SEC-ROT-003, SEC-OPS-003, SEC-SIG-001, SEC-SIG-002, SEC-DEV-002\n\n## Design references\n\n[Architecture](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/architecture.md) \u00b7 [Integration matrix](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/integration-matrix.md) \u00b7 [Security](https://github.com/gntik-ai/falcone-secrets/blob/main/docs/security.md).\n",
+    "labels": [
+      "type:story",
+      "area:dev",
+      "phase:p2",
+      "effort:l"
+    ]
+  }
+]
