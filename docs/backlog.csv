@@ -1,57 +1,57 @@
 ID,Type,Title,Parent,Phase,Effort,Dependencies,URL
-SEC-CON,Epic,Falcone contracts and replacement scope,,,,,
-SEC-CON-001,Story,Freeze the current secret-management contract inventory,SEC-CON,P0,M,,
-SEC-CON-002,Story,Define ownership and first-party service boundaries,SEC-CON,P0,M,SEC-CON-001,
-SEC-CON-003,Story,Qualify implementation components and license provenance,SEC-CON,P0,L,SEC-CON-001,
-SEC-AUTH,Epic,"Identity, policy and tenant isolation",,,,,
-SEC-AUTH-001,Story,Integrate user and service authorization with Falcone IAM,SEC-AUTH,P1,L,SEC-CON-002,
-SEC-AUTH-002,Story,Implement canonical namespaces and reference validation,SEC-AUTH,P1,M,SEC-AUTH-001,
-SEC-AUTH-003,Story,Implement workload credentials and bounded policy freshness,SEC-AUTH,P1,L,SEC-AUTH-001;SEC-BOOT-002,
-SEC-KV,Epic,Versioned secret storage and lifecycle,,,,,
-SEC-KV-001,Story,Implement write-only workspace secret CRUD,SEC-KV,P1,L,SEC-AUTH-002;SEC-KEY-001,
-SEC-KV-002,Story,"Implement internal versions, concurrency and retention",SEC-KV,P1,L,SEC-KV-001,
-SEC-KV-003,Story,"Implement inventory, reference tracking and tenant purge",SEC-KV,P2,M,SEC-KV-002;SEC-AUD-001,
-SEC-KEY,Epic,"Encryption, key custody and rewrapping",,,,,
-SEC-KEY-001,Story,Implement authenticated envelope encryption,SEC-KEY,P1,L,SEC-CON-003;SEC-BOOT-001,
-SEC-KEY-002,Story,"Implement key rotation, rewrap and compromise response",SEC-KEY,P1,L,SEC-KEY-001,
-SEC-KEY-003,Story,"Protect memory, transport and key-provider boundaries",SEC-KEY,P2,L,SEC-KEY-001;SEC-BOOT-002,
-SEC-BOOT,Epic,"Bootstrap, sealing and recovery trust",,,,,
-SEC-BOOT-001,Story,Define and implement root-of-trust bootstrap,SEC-BOOT,P0,L,SEC-CON-002;SEC-CON-003,
-SEC-BOOT-002,Story,Implement narrow IAM signing bootstrap and sealed-state behavior,SEC-BOOT,P1,L,SEC-BOOT-001,
-SEC-BOOT-003,Story,"Implement break-glass, recovery and custodian procedures",SEC-BOOT,P2,L,SEC-BOOT-002;SEC-KEY-002;SEC-AUD-001,
-SEC-DYN,Epic,Dynamic credentials and leases,,,,,
-SEC-DYN-001,Story,Implement durable lease issuance and lifecycle,SEC-DYN,P2,L,SEC-AUTH-003;SEC-KV-002,
-SEC-DYN-002,Story,Implement PostgreSQL credential adapter,SEC-DYN,P2,L,SEC-DYN-001,
-SEC-DYN-003,Story,"Qualify S3, event and external-provider credential adapters",SEC-DYN,P2,L,SEC-DYN-001;SEC-CON-001,
-SEC-ROT,Epic,Rotation and consumer convergence,,,,,
-SEC-ROT-001,Story,Implement resumable rotation orchestration,SEC-ROT,P1,L,SEC-KV-002;SEC-AUTH-001,
-SEC-ROT-002,Story,Implement authenticated acknowledgements and convergence status,SEC-ROT,P2,L,SEC-ROT-001;SEC-DEL-001,
-SEC-ROT-003,Story,"Implement grace expiry, revocation and stalled-work recovery",SEC-ROT,P2,L,SEC-ROT-002;SEC-DYN-001;SEC-AUD-002,
-SEC-DEL,Epic,Secret delivery and workload confinement,,,,,
-SEC-DEL-001,Story,Implement namespaced delivery and optional ESO adapters,SEC-DEL,P1,L,SEC-AUTH-003;SEC-KV-002,
-SEC-DEL-002,Story,Integrate trusted serverless hosts and function projections,SEC-DEL,P2,L,SEC-DEL-001;SEC-ROT-002,
-SEC-DEL-003,Story,Integrate workflow activities and execution credential references,SEC-DEL,P2,L,SEC-DEL-001;SEC-DYN-001,
-SEC-INT,Epic,Falcone product and infrastructure integrations,,,,,
-SEC-INT-001,Story,"Integrate gateway, consoles, SDKs and provisioning",SEC-INT,P2,L,SEC-KV-003;SEC-ROT-002,
-SEC-INT-002,Story,Integrate BYOK and provider credential brokers,SEC-INT,P2,L,SEC-DEL-001;SEC-AUTH-002,
-SEC-INT-003,Story,"Integrate webhook, IAM and platform key lifecycles",SEC-INT,P2,L,SEC-SIG-001;SEC-BOOT-002;SEC-CON-001,
-SEC-SIG,Epic,Cryptographic operations and certificate custody,,,,,
-SEC-SIG-001,Story,Implement purpose-bound signing and verification,SEC-SIG,P2,L,SEC-KEY-002;SEC-BOOT-002;SEC-AUTH-001,
-SEC-SIG-002,Story,Implement transit encryption and data-key operations,SEC-SIG,P2,L,SEC-KEY-002;SEC-AUTH-001,
-SEC-SIG-003,Story,Qualify certificate custody and optional CA integration,SEC-SIG,P2,M,SEC-KEY-001;SEC-CON-001,
-SEC-AUD,Epic,"Audit, durable events and observability",,,,,
-SEC-AUD-001,Story,Implement value-free audit and read-release evidence,SEC-AUD,P1,L,SEC-CON-002;SEC-AUTH-001,
-SEC-AUD-002,Story,Implement transactional outbox and reconciliation workers,SEC-AUD,P1,L,SEC-AUD-001;SEC-KV-002,
-SEC-AUD-003,Story,"Implement metrics, inventory alerts and audit retention",SEC-AUD,P2,M,SEC-AUD-002;SEC-OPS-002,
-SEC-OPS,Epic,Restricted deployment and reliable operation,,,,,
-SEC-OPS-001,Story,Package restricted namespace deployments,SEC-OPS,P1,M,SEC-BOOT-002;SEC-KEY-001,
-SEC-OPS-002,Story,Benchmark and agree service objectives,SEC-OPS,P0,M,SEC-CON-001,
-SEC-OPS-003,Story,"Implement backups, restore, upgrades and ownership",SEC-OPS,P2,L,SEC-OPS-001;SEC-BOOT-003;SEC-ROT-003,
-SEC-MIG,Epic,OpenBao migration and retirement,,,,,
-SEC-MIG-001,Story,Build a dry-run inventory and controlled importer,SEC-MIG,P1,L,SEC-CON-001;SEC-KV-002,
-SEC-MIG-002,Story,Implement canary cutover and conflict-safe rollback,SEC-MIG,P3,L,SEC-MIG-001;SEC-INT-001;SEC-INT-002;SEC-INT-003;SEC-DEL-002;SEC-DEL-003;SEC-DEV-003,
-SEC-MIG-003,Story,Retire OpenBao after evidence gates,SEC-MIG,P3,M,SEC-MIG-002;SEC-OPS-003,
-SEC-DEV,Epic,Developer tooling and security qualification,,,,,
-SEC-DEV-001,Story,"Publish schemas, SDK adapters and local fixtures",SEC-DEV,P1,M,SEC-CON-001;SEC-AUTH-002,
-SEC-DEV-002,Story,Implement supply-chain and dependency release gates,SEC-DEV,P1,M,SEC-CON-003,
-SEC-DEV-003,Story,"Qualify isolation, cryptography and failure behavior",SEC-DEV,P2,L,SEC-KEY-003;SEC-AUTH-003;SEC-ROT-003;SEC-OPS-003;SEC-SIG-001;SEC-SIG-002;SEC-DEV-002,
+SEC-CON,Epic,Falcone contracts and replacement scope,,,,,https://github.com/gntik-ai/falcone-secrets/issues/1
+SEC-CON-001,Story,Freeze the current secret-management contract inventory,SEC-CON,P0,M,,https://github.com/gntik-ai/falcone-secrets/issues/15
+SEC-CON-002,Story,Define ownership and first-party service boundaries,SEC-CON,P0,M,SEC-CON-001,https://github.com/gntik-ai/falcone-secrets/issues/16
+SEC-CON-003,Story,Qualify implementation components and license provenance,SEC-CON,P0,L,SEC-CON-001,https://github.com/gntik-ai/falcone-secrets/issues/17
+SEC-AUTH,Epic,"Identity, policy and tenant isolation",,,,,https://github.com/gntik-ai/falcone-secrets/issues/2
+SEC-AUTH-001,Story,Integrate user and service authorization with Falcone IAM,SEC-AUTH,P1,L,SEC-CON-002,https://github.com/gntik-ai/falcone-secrets/issues/18
+SEC-AUTH-002,Story,Implement canonical namespaces and reference validation,SEC-AUTH,P1,M,SEC-AUTH-001,https://github.com/gntik-ai/falcone-secrets/issues/19
+SEC-AUTH-003,Story,Implement workload credentials and bounded policy freshness,SEC-AUTH,P1,L,SEC-AUTH-001;SEC-BOOT-002,https://github.com/gntik-ai/falcone-secrets/issues/20
+SEC-KV,Epic,Versioned secret storage and lifecycle,,,,,https://github.com/gntik-ai/falcone-secrets/issues/3
+SEC-KV-001,Story,Implement write-only workspace secret CRUD,SEC-KV,P1,L,SEC-AUTH-002;SEC-KEY-001,https://github.com/gntik-ai/falcone-secrets/issues/21
+SEC-KV-002,Story,"Implement internal versions, concurrency and retention",SEC-KV,P1,L,SEC-KV-001,https://github.com/gntik-ai/falcone-secrets/issues/22
+SEC-KV-003,Story,"Implement inventory, reference tracking and tenant purge",SEC-KV,P2,M,SEC-KV-002;SEC-AUD-001,https://github.com/gntik-ai/falcone-secrets/issues/23
+SEC-KEY,Epic,"Encryption, key custody and rewrapping",,,,,https://github.com/gntik-ai/falcone-secrets/issues/4
+SEC-KEY-001,Story,Implement authenticated envelope encryption,SEC-KEY,P1,L,SEC-CON-003;SEC-BOOT-001,https://github.com/gntik-ai/falcone-secrets/issues/24
+SEC-KEY-002,Story,"Implement key rotation, rewrap and compromise response",SEC-KEY,P1,L,SEC-KEY-001,https://github.com/gntik-ai/falcone-secrets/issues/25
+SEC-KEY-003,Story,"Protect memory, transport and key-provider boundaries",SEC-KEY,P2,L,SEC-KEY-001;SEC-BOOT-002,https://github.com/gntik-ai/falcone-secrets/issues/26
+SEC-BOOT,Epic,"Bootstrap, sealing and recovery trust",,,,,https://github.com/gntik-ai/falcone-secrets/issues/5
+SEC-BOOT-001,Story,Define and implement root-of-trust bootstrap,SEC-BOOT,P0,L,SEC-CON-002;SEC-CON-003,https://github.com/gntik-ai/falcone-secrets/issues/27
+SEC-BOOT-002,Story,Implement narrow IAM signing bootstrap and sealed-state behavior,SEC-BOOT,P1,L,SEC-BOOT-001,https://github.com/gntik-ai/falcone-secrets/issues/28
+SEC-BOOT-003,Story,"Implement break-glass, recovery and custodian procedures",SEC-BOOT,P2,L,SEC-BOOT-002;SEC-KEY-002;SEC-AUD-001,https://github.com/gntik-ai/falcone-secrets/issues/29
+SEC-DYN,Epic,Dynamic credentials and leases,,,,,https://github.com/gntik-ai/falcone-secrets/issues/6
+SEC-DYN-001,Story,Implement durable lease issuance and lifecycle,SEC-DYN,P2,L,SEC-AUTH-003;SEC-KV-002,https://github.com/gntik-ai/falcone-secrets/issues/30
+SEC-DYN-002,Story,Implement PostgreSQL credential adapter,SEC-DYN,P2,L,SEC-DYN-001,https://github.com/gntik-ai/falcone-secrets/issues/31
+SEC-DYN-003,Story,"Qualify S3, event and external-provider credential adapters",SEC-DYN,P2,L,SEC-DYN-001;SEC-CON-001,https://github.com/gntik-ai/falcone-secrets/issues/32
+SEC-ROT,Epic,Rotation and consumer convergence,,,,,https://github.com/gntik-ai/falcone-secrets/issues/7
+SEC-ROT-001,Story,Implement resumable rotation orchestration,SEC-ROT,P1,L,SEC-KV-002;SEC-AUTH-001,https://github.com/gntik-ai/falcone-secrets/issues/33
+SEC-ROT-002,Story,Implement authenticated acknowledgements and convergence status,SEC-ROT,P2,L,SEC-ROT-001;SEC-DEL-001,https://github.com/gntik-ai/falcone-secrets/issues/34
+SEC-ROT-003,Story,"Implement grace expiry, revocation and stalled-work recovery",SEC-ROT,P2,L,SEC-ROT-002;SEC-DYN-001;SEC-AUD-002,https://github.com/gntik-ai/falcone-secrets/issues/35
+SEC-DEL,Epic,Secret delivery and workload confinement,,,,,https://github.com/gntik-ai/falcone-secrets/issues/8
+SEC-DEL-001,Story,Implement namespaced delivery and optional ESO adapters,SEC-DEL,P1,L,SEC-AUTH-003;SEC-KV-002,https://github.com/gntik-ai/falcone-secrets/issues/36
+SEC-DEL-002,Story,Integrate trusted serverless hosts and function projections,SEC-DEL,P2,L,SEC-DEL-001;SEC-ROT-002,https://github.com/gntik-ai/falcone-secrets/issues/37
+SEC-DEL-003,Story,Integrate workflow activities and execution credential references,SEC-DEL,P2,L,SEC-DEL-001;SEC-DYN-001,https://github.com/gntik-ai/falcone-secrets/issues/38
+SEC-INT,Epic,Falcone product and infrastructure integrations,,,,,https://github.com/gntik-ai/falcone-secrets/issues/9
+SEC-INT-001,Story,"Integrate gateway, consoles, SDKs and provisioning",SEC-INT,P2,L,SEC-KV-003;SEC-ROT-002,https://github.com/gntik-ai/falcone-secrets/issues/39
+SEC-INT-002,Story,Integrate BYOK and provider credential brokers,SEC-INT,P2,L,SEC-DEL-001;SEC-AUTH-002,https://github.com/gntik-ai/falcone-secrets/issues/40
+SEC-INT-003,Story,"Integrate webhook, IAM and platform key lifecycles",SEC-INT,P2,L,SEC-SIG-001;SEC-BOOT-002;SEC-CON-001,https://github.com/gntik-ai/falcone-secrets/issues/41
+SEC-SIG,Epic,Cryptographic operations and certificate custody,,,,,https://github.com/gntik-ai/falcone-secrets/issues/10
+SEC-SIG-001,Story,Implement purpose-bound signing and verification,SEC-SIG,P2,L,SEC-KEY-002;SEC-BOOT-002;SEC-AUTH-001,https://github.com/gntik-ai/falcone-secrets/issues/42
+SEC-SIG-002,Story,Implement transit encryption and data-key operations,SEC-SIG,P2,L,SEC-KEY-002;SEC-AUTH-001,https://github.com/gntik-ai/falcone-secrets/issues/43
+SEC-SIG-003,Story,Qualify certificate custody and optional CA integration,SEC-SIG,P2,M,SEC-KEY-001;SEC-CON-001,https://github.com/gntik-ai/falcone-secrets/issues/44
+SEC-AUD,Epic,"Audit, durable events and observability",,,,,https://github.com/gntik-ai/falcone-secrets/issues/11
+SEC-AUD-001,Story,Implement value-free audit and read-release evidence,SEC-AUD,P1,L,SEC-CON-002;SEC-AUTH-001,https://github.com/gntik-ai/falcone-secrets/issues/45
+SEC-AUD-002,Story,Implement transactional outbox and reconciliation workers,SEC-AUD,P1,L,SEC-AUD-001;SEC-KV-002,https://github.com/gntik-ai/falcone-secrets/issues/46
+SEC-AUD-003,Story,"Implement metrics, inventory alerts and audit retention",SEC-AUD,P2,M,SEC-AUD-002;SEC-OPS-002,https://github.com/gntik-ai/falcone-secrets/issues/47
+SEC-OPS,Epic,Restricted deployment and reliable operation,,,,,https://github.com/gntik-ai/falcone-secrets/issues/12
+SEC-OPS-001,Story,Package restricted namespace deployments,SEC-OPS,P1,M,SEC-BOOT-002;SEC-KEY-001,https://github.com/gntik-ai/falcone-secrets/issues/48
+SEC-OPS-002,Story,Benchmark and agree service objectives,SEC-OPS,P0,M,SEC-CON-001,https://github.com/gntik-ai/falcone-secrets/issues/49
+SEC-OPS-003,Story,"Implement backups, restore, upgrades and ownership",SEC-OPS,P2,L,SEC-OPS-001;SEC-BOOT-003;SEC-ROT-003,https://github.com/gntik-ai/falcone-secrets/issues/50
+SEC-MIG,Epic,OpenBao migration and retirement,,,,,https://github.com/gntik-ai/falcone-secrets/issues/13
+SEC-MIG-001,Story,Build a dry-run inventory and controlled importer,SEC-MIG,P1,L,SEC-CON-001;SEC-KV-002,https://github.com/gntik-ai/falcone-secrets/issues/51
+SEC-MIG-002,Story,Implement canary cutover and conflict-safe rollback,SEC-MIG,P3,L,SEC-MIG-001;SEC-INT-001;SEC-INT-002;SEC-INT-003;SEC-DEL-002;SEC-DEL-003;SEC-DEV-003,https://github.com/gntik-ai/falcone-secrets/issues/52
+SEC-MIG-003,Story,Retire OpenBao after evidence gates,SEC-MIG,P3,M,SEC-MIG-002;SEC-OPS-003,https://github.com/gntik-ai/falcone-secrets/issues/53
+SEC-DEV,Epic,Developer tooling and security qualification,,,,,https://github.com/gntik-ai/falcone-secrets/issues/14
+SEC-DEV-001,Story,"Publish schemas, SDK adapters and local fixtures",SEC-DEV,P1,M,SEC-CON-001;SEC-AUTH-002,https://github.com/gntik-ai/falcone-secrets/issues/54
+SEC-DEV-002,Story,Implement supply-chain and dependency release gates,SEC-DEV,P1,M,SEC-CON-003,https://github.com/gntik-ai/falcone-secrets/issues/55
+SEC-DEV-003,Story,"Qualify isolation, cryptography and failure behavior",SEC-DEV,P2,L,SEC-KEY-003;SEC-AUTH-003;SEC-ROT-003;SEC-OPS-003;SEC-SIG-001;SEC-SIG-002;SEC-DEV-002,https://github.com/gntik-ai/falcone-secrets/issues/56

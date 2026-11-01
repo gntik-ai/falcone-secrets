@@ -1,1 +1,226 @@
-{}
+{
+  "SEC-CON": {
+    "number": 1,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/1"
+  },
+  "SEC-AUTH": {
+    "number": 2,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/2"
+  },
+  "SEC-KV": {
+    "number": 3,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/3"
+  },
+  "SEC-KEY": {
+    "number": 4,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/4"
+  },
+  "SEC-BOOT": {
+    "number": 5,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/5"
+  },
+  "SEC-DYN": {
+    "number": 6,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/6"
+  },
+  "SEC-ROT": {
+    "number": 7,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/7"
+  },
+  "SEC-DEL": {
+    "number": 8,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/8"
+  },
+  "SEC-INT": {
+    "number": 9,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/9"
+  },
+  "SEC-SIG": {
+    "number": 10,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/10"
+  },
+  "SEC-AUD": {
+    "number": 11,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/11"
+  },
+  "SEC-OPS": {
+    "number": 12,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/12"
+  },
+  "SEC-MIG": {
+    "number": 13,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/13"
+  },
+  "SEC-DEV": {
+    "number": 14,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/14"
+  },
+  "SEC-CON-001": {
+    "number": 15,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/15"
+  },
+  "SEC-CON-002": {
+    "number": 16,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/16"
+  },
+  "SEC-CON-003": {
+    "number": 17,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/17"
+  },
+  "SEC-AUTH-001": {
+    "number": 18,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/18"
+  },
+  "SEC-AUTH-002": {
+    "number": 19,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/19"
+  },
+  "SEC-AUTH-003": {
+    "number": 20,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/20"
+  },
+  "SEC-KV-001": {
+    "number": 21,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/21"
+  },
+  "SEC-KV-002": {
+    "number": 22,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/22"
+  },
+  "SEC-KV-003": {
+    "number": 23,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/23"
+  },
+  "SEC-KEY-001": {
+    "number": 24,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/24"
+  },
+  "SEC-KEY-002": {
+    "number": 25,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/25"
+  },
+  "SEC-KEY-003": {
+    "number": 26,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/26"
+  },
+  "SEC-BOOT-001": {
+    "number": 27,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/27"
+  },
+  "SEC-BOOT-002": {
+    "number": 28,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/28"
+  },
+  "SEC-BOOT-003": {
+    "number": 29,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/29"
+  },
+  "SEC-DYN-001": {
+    "number": 30,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/30"
+  },
+  "SEC-DYN-002": {
+    "number": 31,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/31"
+  },
+  "SEC-DYN-003": {
+    "number": 32,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/32"
+  },
+  "SEC-ROT-001": {
+    "number": 33,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/33"
+  },
+  "SEC-ROT-002": {
+    "number": 34,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/34"
+  },
+  "SEC-ROT-003": {
+    "number": 35,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/35"
+  },
+  "SEC-DEL-001": {
+    "number": 36,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/36"
+  },
+  "SEC-DEL-002": {
+    "number": 37,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/37"
+  },
+  "SEC-DEL-003": {
+    "number": 38,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/38"
+  },
+  "SEC-INT-001": {
+    "number": 39,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/39"
+  },
+  "SEC-INT-002": {
+    "number": 40,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/40"
+  },
+  "SEC-INT-003": {
+    "number": 41,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/41"
+  },
+  "SEC-SIG-001": {
+    "number": 42,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/42"
+  },
+  "SEC-SIG-002": {
+    "number": 43,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/43"
+  },
+  "SEC-SIG-003": {
+    "number": 44,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/44"
+  },
+  "SEC-AUD-001": {
+    "number": 45,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/45"
+  },
+  "SEC-AUD-002": {
+    "number": 46,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/46"
+  },
+  "SEC-AUD-003": {
+    "number": 47,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/47"
+  },
+  "SEC-OPS-001": {
+    "number": 48,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/48"
+  },
+  "SEC-OPS-002": {
+    "number": 49,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/49"
+  },
+  "SEC-OPS-003": {
+    "number": 50,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/50"
+  },
+  "SEC-MIG-001": {
+    "number": 51,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/51"
+  },
+  "SEC-MIG-002": {
+    "number": 52,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/52"
+  },
+  "SEC-MIG-003": {
+    "number": 53,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/53"
+  },
+  "SEC-DEV-001": {
+    "number": 54,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/54"
+  },
+  "SEC-DEV-002": {
+    "number": 55,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/55"
+  },
+  "SEC-DEV-003": {
+    "number": 56,
+    "url": "https://github.com/gntik-ai/falcone-secrets/issues/56"
+  }
+}
